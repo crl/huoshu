@@ -23,6 +23,12 @@ class ViewController: BaseWebViewController {
         let t=Facade.GetMediator(TestMediator.self);
         t.hello("crl");
         */
+        
+        
+        let notifi=NotificationCenter.default;
+        notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: huoshuLoginNotification, object: nil);
+        notifi.addObserver(self, selector: #selector(sdkPayHandle), name: huoshuPaytNotification, object: nil);
+        
    
         sdk.on("load", #selector(doLoad), self);
         
@@ -79,7 +85,13 @@ class ViewController: BaseWebViewController {
         //test;
         super.doInit(e: e);
         
-        sdk.send(CMD.Login,["open_id":"123"]);
+        //sdk.send(CMD.Login,["open_id":"123"]);
+        //let m=HuoShuSDKMgr.getInstance();
+        //m?.loginRole(withServerId: <#T##String!#>, withRoleId: <#T##String!#>, withRoleName: <#T##String!#>, withRoleLevel: <#T##String!#>)
+        
+        self.present(LoginViewController(), animated: true){
+            
+        }
     }
     
     
@@ -98,14 +110,42 @@ class ViewController: BaseWebViewController {
         
         productId="yb07";
         print(productId);
-        let iap=IAP.Instance;
+        //let iap=IAP.Instance;
         //iap.add
-        iap.pay(productId);
+        //iap.pay(productId);
+        
+        let serverID="";
+        let roleID="";
+        let payMount="";
+        
+        let goodID="";
+        let money="";
+        
+        
+        
+        let temp=100000+arc4random()%100000;
+        let order="\(temp)huoshuSDk";
+        
+        let m=HuoShuSDKMgr.getInstance();
+        m?.openPay(withServerid: serverID, withRoleId: roleID, withPayAmount: payMount, withCallBack: order, withGoodId: goodID, withMoney: money, with: self)
     }
     
     
     @objc func doLoad(e:EventX){
         loadWeb(e.data as! String);
+    }
+    
+    
+    
+    @objc func sdkLoginHandle(e:Notification){
+        let dic=HuoShuSDKMgr.getLoginInfo();
+        
+        print(dic!);
+    }
+    @objc func sdkPayHandle(e:Notification){
+        let dic=e.object;
+        
+        print(dic!);
     }
 }
 

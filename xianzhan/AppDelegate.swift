@@ -16,6 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        /**
+         游戏标识(app_id)：
+         5bf5042956fec80d6268c787
+         游戏密钥管理
+         客户端密钥：(app_client_key)
+         280389b0f74f608f354bb595eb2a6d18
+         服务端密钥：(app_server_key)
+         ed00a42b41807d7eafe9e16d01a34afc
+         */
+        
+        let appid="5bf5042956fec80d6268c787";
+        let appkey="280389b0f74f608f354bb595eb2a6d18";
+        
+        HuoShuSDKMgr.huoShuSDKInit(withApp_id: appid, withAppKey: appkey, withGameVer: "1.0", withIsRequireLogin: true);
+        
         return true
     }
 
