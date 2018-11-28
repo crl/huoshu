@@ -9,7 +9,7 @@
 import UIKit
 import WebKit;
 
-class ViewController: BaseWebViewController {
+class ViewController: BaseWebViewController,ISDKRouter {
     
     private var rootURL="https://xz-hf-dev.fire233.com/index.html";
     
@@ -20,17 +20,18 @@ class ViewController: BaseWebViewController {
         
         //TickManager.Add(self);
         /*Singleton.Register(TestMediator.self);
-        let t=Facade.GetMediator(TestMediator.self);
-        t.hello("crl");
-        */
+         let t=Facade.GetMediator(TestMediator.self);
+         t.hello("crl");
+         */
         
         
         let notifi=NotificationCenter.default;
-        notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: huoshuLoginNotification, object: nil);
-        notifi.addObserver(self, selector: #selector(sdkPayHandle), name: huoshuPaytNotification, object: nil);
+        notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: NSNotification.Name.huoshuLogin, object: nil);
+        notifi.addObserver(self, selector: #selector(sdkPayHandle), name: NSNotification.Name.huoshuPayt, object: nil);
         
-   
+        
         sdk.on("load", #selector(doLoad), self);
+        sdk.router=self;
         
         let loader=URLLoader("https://xz-hf-dev.fire233.com/web.xml");
         loader.defaultEvent(#selector(configHandle),self);
@@ -106,7 +107,11 @@ class ViewController: BaseWebViewController {
     }
     
     @objc override func doPay(e:EventX) {
-        var productId=e.data as! String;
+       let dic=e.data as! [String:String];
+        
+        var productId:String;
+        
+        productId=dic["object_name"]!
         
         productId="yb07";
         print(productId);
@@ -121,8 +126,6 @@ class ViewController: BaseWebViewController {
         let goodID="";
         let money="";
         
-        
-        
         let temp=100000+arc4random()%100000;
         let order="\(temp)huoshuSDk";
         
@@ -135,10 +138,14 @@ class ViewController: BaseWebViewController {
         loadWeb(e.data as! String);
     }
     
-    
-    
     @objc func sdkLoginHandle(e:Notification){
         let dic=HuoShuSDKMgr.getLoginInfo();
+        
+        if let d=dic{
+            let openid=d["openId"];
+            d["open_id"]=openid;
+            sdk.send(CMD.Login, d);
+        }
         
         print(dic!);
     }
@@ -146,6 +153,27 @@ class ViewController: BaseWebViewController {
         let dic=e.object;
         
         print(dic!);
+    }
+    
+    
+    
+    func receipt(_ c: String, _ d:Any) {
+        switch c {
+        case "enterGameLog":
+            let dic=d as! [String:String];
+            HuoShuSDKMgr.getInstance()?.loginRole(withServerId: dic["server_id"], withRoleId: dic["role_id"], withRoleName: dic["nickname"], withRoleLevel: dic["level"]);
+            
+        case "createRoleLog":
+            let dic=d as! [String:String];
+            HuoShuSDKMgr.getInstance()?.createRole(withServerId: dic["server_id"], withRoleId: dic["role_id"], withRoleName: dic["nickname"]);
+            
+        case "levelUpLog":
+            let dic=d as! [String:String];
+            HuoShuSDKMgr.getInstance()?.upgradeRole(withServerId: dic["server_id"], withRoleId: dic["role_id"], withRoleName: dic["nickname"], withRoleLevel: dic["level"]);
+            
+        default: break
+            
+        }
     }
 }
 

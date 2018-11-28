@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appid="5bf5042956fec80d6268c787";
         let appkey="280389b0f74f608f354bb595eb2a6d18";
         
+        print("sdk ver:",HuoShuSDKVersionNumber)
+        
         HuoShuSDKMgr.huoShuSDKInit(withApp_id: appid, withAppKey: appkey, withGameVer: "1.0", withIsRequireLogin: true);
         
         return true

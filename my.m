@@ -7,6 +7,7 @@
 //
 
 #import "my.h"
+#import <HuoShuSDK/HuoShuSDK.h>
 #import <HuoShuSDK/HuoShuSDKMgr.h>
 #import <HuoShuSDK/HuoShuNotifications.h>
 #import <HuoShuSDK/LoginViewController.h>

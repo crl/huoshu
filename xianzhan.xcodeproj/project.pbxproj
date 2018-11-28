@@ -44,6 +44,8 @@
 		0C74E3D021AC2E420084CEA8 /* HuoShuSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C74E3CE21AC2E420084CEA8 /* HuoShuSDK.framework */; };
 		0C74E3D121AC2E420084CEA8 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C74E3CF21AC2E420084CEA8 /* Resources.bundle */; };
 		0C74E3D521AC2E990084CEA8 /* my.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C74E3D421AC2E990084CEA8 /* my.m */; };
+		0C74E3D621AE46F30084CEA8 /* HuoShuSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C74E3CE21AC2E420084CEA8 /* HuoShuSDK.framework */; };
+		0C74E3D721AE46F30084CEA8 /* HuoShuSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C74E3CE21AC2E420084CEA8 /* HuoShuSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C75487C21A4459A00D19EB1 /* XMLUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75487B21A4459A00D19EB1 /* XMLUtil.swift */; };
 		0CE1527821913FF500945FA5 /* IFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE1527721913FF500945FA5 /* IFacade.swift */; };
 		0CE1527A2191412900945FA5 /* Facade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE152792191412900945FA5 /* Facade.swift */; };
@@ -55,6 +57,20 @@
 		0CE201E721901026006C6FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE201E621901026006C6FF0 /* Assets.xcassets */; };
 		0CE201EA21901026006C6FF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE201E821901026006C6FF0 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0C74E3D821AE46F30084CEA8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0C74E3D721AE46F30084CEA8 /* HuoShuSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C3826DE21A6CA0F00EA5834 /* inject.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
@@ -118,6 +134,7 @@
 				0C6250E821AB9B0C00E9998A /* CoreLocation.framework in Frameworks */,
 				0C74E3D021AC2E420084CEA8 /* HuoShuSDK.framework in Frameworks */,
 				0C6250F621AB9B5400E9998A /* SystemConfiguration.framework in Frameworks */,
+				0C74E3D621AE46F30084CEA8 /* HuoShuSDK.framework in Frameworks */,
 				0C6250F421AB9B4B00E9998A /* Foundation.framework in Frameworks */,
 				0C6250F221AB9B4400E9998A /* Security.framework in Frameworks */,
 				0C6250F021AB9B3B00E9998A /* CoreTelephony.framework in Frameworks */,
@@ -334,6 +351,7 @@
 				0CE201D821901024006C6FF0 /* Sources */,
 				0CE201D921901024006C6FF0 /* Frameworks */,
 				0CE201DA21901024006C6FF0 /* Resources */,
+				0C74E3D821AE46F30084CEA8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -579,8 +597,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y58JA4U53L;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = GNYX7GYH8L;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -591,9 +610,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lingyu8.xianzhan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mmgame.xianzhan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = xzDev;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "xianzhan-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -607,10 +626,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y58JA4U53L;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = GNYX7GYH8L;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -621,9 +641,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lingyu8.xianzhan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mmgame.xianzhan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = xzDis;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "xianzhan-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

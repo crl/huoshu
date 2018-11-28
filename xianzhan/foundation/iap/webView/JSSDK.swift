@@ -15,9 +15,17 @@ class CMD{
     static let Pay="2";
     static let Check="-1";
 }
+
+
+protocol ISDKRouter {
+    func receipt(_ c:String,_ d:Any)->Void;
+}
+
 class JSSDK: EventDispatcher {
     
     private var webView:WKWebView!;
+    
+    var router:ISDKRouter?;
     
     static var ins:JSSDK?=nil;
     static func Get()->JSSDK{
@@ -60,7 +68,12 @@ class JSSDK: EventDispatcher {
     func receipt(_ c:String,_ d:String){
         print("byJS:",c,d);
         
-        self.simpleDispatch(c, d);
+        let t=JSONUtil.DecodeSafe(d, def:d);
+        if let r=router{
+            r.receipt(c, t);
+        }
+        
+        self.simpleDispatch(c, t);
     }
     
 }
