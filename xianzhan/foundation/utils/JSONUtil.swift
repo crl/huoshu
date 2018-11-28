@@ -8,11 +8,7 @@
 
 import UIKit
 
-class JSONUtil {
-    private init(){
-        
-    }
-    
+class JSONUtil {    
     static func Encode(_ data:Any) -> String {
         
         do {
@@ -38,16 +34,5 @@ class JSONUtil {
             print(error,value);
         }
         return [:];
-    }
-    
-    static func DecodeSafe(_ value:String,def:Any?) -> Any {
-        do{
-            let jsonData=value.data(using: .utf8, allowLossyConversion: false)!;
-            let json=try JSONSerialization.jsonObject(with: jsonData, options:[]) as! [String:Any];
-            return json;
-        }catch{
-            
-        }
-        return def;
     }
 }

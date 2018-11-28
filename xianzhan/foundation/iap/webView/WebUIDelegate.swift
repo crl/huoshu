@@ -110,9 +110,14 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
         }
         
         let c=String(describing: cmd["c"] ?? "");
-        let d=String(describing: cmd["d"] ?? "");
+        let d=cmd["d"] ?? "";
         
-        sdk.receipt(c,d);
+        switch c {
+        case "log","warn","error":
+            print(c,d);
+        default:
+           sdk.receipt(c,d);
+        }
     }
     
     //WKUIDelegate

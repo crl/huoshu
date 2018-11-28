@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const huoshuRegisterNotification;
 extern NSString * const huoshuExitNotification;                  /**<  退出 */
 extern NSString * const huoshuLoginNotification;                    /**< 登录完成的通知*/
 extern NSString * const huoshuPaytNotification;                  /**< 支付通知 */

@@ -65,15 +65,14 @@ class JSSDK: EventDispatcher {
         }
     }
     
-    func receipt(_ c:String,_ d:String){
+    func receipt(_ c:String,_ d:Any){
         print("byJS:",c,d);
         
-        let t=JSONUtil.DecodeSafe(d, def:d);
         if let r=router{
-            r.receipt(c, t);
+            r.receipt(c, d);
         }
         
-        self.simpleDispatch(c, t);
+        self.simpleDispatch(c, d);
     }
     
 }

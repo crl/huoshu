@@ -160,16 +160,16 @@ class ViewController: BaseWebViewController,ISDKRouter {
     func receipt(_ c: String, _ d:Any) {
         switch c {
         case "enterGameLog":
-            let dic=d as! [String:String];
-            HuoShuSDKMgr.getInstance()?.loginRole(withServerId: dic["server_id"], withRoleId: dic["role_id"], withRoleName: dic["nickname"], withRoleLevel: dic["level"]);
+            let dic=d as! [String:Any];
+            HuoShuSDKMgr.getInstance()?.loginRole(withServerId: dic["server_id"] as? String, withRoleId: dic["role_id"] as? String, withRoleName: dic["nickname"] as? String, withRoleLevel: dic["level"] as? String);
             
         case "createRoleLog":
-            let dic=d as! [String:String];
-            HuoShuSDKMgr.getInstance()?.createRole(withServerId: dic["server_id"], withRoleId: dic["role_id"], withRoleName: dic["nickname"]);
+            let dic=d as! [String:Any];
+            HuoShuSDKMgr.getInstance()?.createRole(withServerId: dic["server_id"] as? String, withRoleId: dic["role_id"] as? String, withRoleName: dic["nickname"] as? String);
             
         case "levelUpLog":
-            let dic=d as! [String:String];
-            HuoShuSDKMgr.getInstance()?.upgradeRole(withServerId: dic["server_id"], withRoleId: dic["role_id"], withRoleName: dic["nickname"], withRoleLevel: dic["level"]);
+            let dic=d as! [String:Any];
+            HuoShuSDKMgr.getInstance()?.upgradeRole(withServerId: dic["server_id"] as? String, withRoleId: dic["role_id"] as? String, withRoleName: dic["nickname"] as? String, withRoleLevel: dic["level"] as? String);
             
         default: break
             
