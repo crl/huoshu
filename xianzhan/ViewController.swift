@@ -24,7 +24,6 @@ class ViewController: BaseWebViewController,ISDKRouter {
          t.hello("crl");
          */
         
-        
         let notifi=NotificationCenter.default;
         notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: NSNotification.Name.huoshuLogin, object: nil);
         notifi.addObserver(self, selector: #selector(sdkPayHandle), name: NSNotification.Name.huoshuPayt, object: nil);
@@ -37,7 +36,9 @@ class ViewController: BaseWebViewController,ISDKRouter {
         loader.defaultEvent(#selector(configHandle),self);
         loader.load();
     }
-    
+    override var prefersStatusBarHidden: Bool {
+        return true;
+    }
     
     @objc func configHandle(e:EventX) {
         
@@ -135,17 +136,32 @@ class ViewController: BaseWebViewController,ISDKRouter {
     }
     
     @objc func sdkRegisterHandle(e:Notification){
-        sdkLoginHandle(e: e);
+        DispatchQueue.main.async {
+            self.doSdkLogin(e);
+        }
     }
     @objc func sdkLoginHandle(e:Notification){
+        DispatchQueue.main.async {
+            self.doSdkLogin(e);
+        }
+    }
+    
+    func doSdkLogin(_ e:Notification){
         let dic=HuoShuSDKMgr.getLoginInfo();
         
         if let d=dic{
             let openid=d["openId"];
-            d["open_id"]=openid;
-            //print("lo",openid);
             
-            sdk.send(CMD.Login, d);
+            if let id=openid {
+            
+                d["open_id"]=id;
+                print("openId:",id);
+                
+                sdk.send(CMD.Login, d);
+            }else{
+                let d="loginInfo:\(d)";
+                Utils.Alert(d);
+            }
         }
         
         print(dic!);

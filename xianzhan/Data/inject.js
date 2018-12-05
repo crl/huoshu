@@ -28,13 +28,6 @@ console.warn = function(f){
 }(console.warn);
 
 
-window.onerror = function (msg, url, lineNo, columnNo, error) {
-    var m = [
-                   'Message: ' + msg,
-                   'URL: ' + url,
-                   'Line: ' + lineNo,
-                   'Column: ' + columnNo,
-                   'Error stack: ' + error ? error.stack : ''
-                   ].join(' - ');
-    console.error(m);
+window.onerror = function () {
+    console.error.apply(console,arguments);
 }

@@ -53,7 +53,7 @@ class JSSDK: EventDispatcher {
         
         let cmd="PlatformSDK.Receive('\(command)')";
         
-        webView.evaluateJavaScript(cmd){
+        webView.evaluateJavaScript(cmd)/*{
             (data, error) in
             
             if let d=data{
@@ -62,7 +62,7 @@ class JSSDK: EventDispatcher {
             if let e=error{
                 print("jserror:",e)
             }
-        }
+        }*/
     }
     
     func receipt(_ c:String,_ d:Any){
