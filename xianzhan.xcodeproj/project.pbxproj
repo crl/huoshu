@@ -10,6 +10,7 @@
 		0C23332421B790EB008AEFA3 /* 60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C23332321B790EB008AEFA3 /* 60x60@2x.png */; };
 		0C23332721B79175008AEFA3 /* 83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C23332521B79175008AEFA3 /* 83.5x83.5@2x.png */; };
 		0C23332821B79175008AEFA3 /* 76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C23332621B79175008AEFA3 /* 76x76@2x.png */; };
+		0C23332A21B795E7008AEFA3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C23332921B795E7008AEFA3 /* StoreKit.framework */; };
 		0C3826DF21A6CA0F00EA5834 /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 0C3826DE21A6CA0F00EA5834 /* inject.js */; };
 		0C3826E121A6D28F00EA5834 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C3826E021A6D28F00EA5834 /* icon.png */; };
 		0C4B20A021915A100062E44B /* Mediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B209F21915A100062E44B /* Mediator.swift */; };
@@ -79,6 +80,7 @@
 		0C23332321B790EB008AEFA3 /* 60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60x60@2x.png"; sourceTree = "<group>"; };
 		0C23332521B79175008AEFA3 /* 83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "83.5x83.5@2x.png"; sourceTree = "<group>"; };
 		0C23332621B79175008AEFA3 /* 76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "76x76@2x.png"; sourceTree = "<group>"; };
+		0C23332921B795E7008AEFA3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0C3826DE21A6CA0F00EA5834 /* inject.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
 		0C3826E021A6D28F00EA5834 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		0C4B209F21915A100062E44B /* Mediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mediator.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				0C6250EE21AB9B3000E9998A /* CoreMotion.framework in Frameworks */,
 				0C6250EC21AB9B2800E9998A /* libsqlite3.tbd in Frameworks */,
 				0C6250EA21AB9B1700E9998A /* AdSupport.framework in Frameworks */,
+				0C23332A21B795E7008AEFA3 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +272,7 @@
 		0C6250E621AB9B0C00E9998A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C23332921B795E7008AEFA3 /* StoreKit.framework */,
 				0C6250F521AB9B5400E9998A /* SystemConfiguration.framework */,
 				0C6250F321AB9B4B00E9998A /* Foundation.framework */,
 				0C6250F121AB9B4400E9998A /* Security.framework */,
@@ -384,6 +388,11 @@
 					0CE201DB21901024006C6FF0 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1010;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
