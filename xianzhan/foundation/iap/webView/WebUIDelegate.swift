@@ -114,7 +114,7 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
         
         switch c {
         case "log","warn","error":
-            print(c,d);
+            print("console."+c,d);
         default:
            sdk.receipt(c,d);
         }

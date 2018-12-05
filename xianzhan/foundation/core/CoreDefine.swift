@@ -40,3 +40,24 @@ func GetMemoryAddress(o:AnyObject)->String{
 func Equatable(_ f:AnyObject,_ t:AnyObject)->Bool{
     return (GetMemoryAddress(o: f) == GetMemoryAddress(o: t));
 }
+
+extension Dictionary{
+    
+    func getString(_ key:Key,def:String="") -> String! {
+        let o=self[key];
+        if (o != nil) {
+            return String(describing: o);
+        }
+        return def;
+    }
+    
+    func getInt(_ key:Key,def:Int=0) -> Int {
+        let o=self[key];
+        if (o != nil) {
+            if let t = o as? Int{
+                return t;
+            }
+        }
+        return def;
+    }
+}

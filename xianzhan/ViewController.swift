@@ -11,7 +11,7 @@ import WebKit;
 
 class ViewController: BaseWebViewController,ISDKRouter {
     
-    private var rootURL="https://xz-hf-dev.fire233.com/index.html";
+    private var rootURL="https://xz-hf-ios.fire233.com/index.html";
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -28,7 +28,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         let notifi=NotificationCenter.default;
         notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: NSNotification.Name.huoshuLogin, object: nil);
         notifi.addObserver(self, selector: #selector(sdkPayHandle), name: NSNotification.Name.huoshuPayt, object: nil);
-        
+        notifi.addObserver(self, selector: #selector(sdkRegisterHandle), name: NSNotification.Name.huoshuRegister, object: nil);
         
         sdk.on("load", #selector(doLoad), self);
         sdk.router=self;
@@ -65,7 +65,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
     
     func enterGame() {
         //test;
-        rootURL="http://192.168.2.43:6060/simple.html";
+        //rootURL="http://192.168.2.43:6060/simple.html";
         
         let time=Date.timeIntervalSinceReferenceDate;
         let t=Int(time);
@@ -107,30 +107,26 @@ class ViewController: BaseWebViewController,ISDKRouter {
     }
     
     @objc override func doPay(e:EventX) {
-       let dic=e.data as! [String:String];
+        let dic=e.data as! [String:Any];
         
-        var productId:String;
-        
-        productId=dic["object_name"]!
-        
-        productId="yb07";
+        let productId:String=dic.getString("key");
         print(productId);
+        
         //let iap=IAP.Instance;
         //iap.add
         //iap.pay(productId);
         
-        let serverID="";
-        let roleID="";
-        let payMount="";
+        let server_id=dic.getString("game_server");
+        let role_id=dic.getString("role_id");
         
-        let goodID="";
-        let money="";
+        let mount=dic.getString("payment_amount");
+        //let goodID=mount;
+        let money=mount;
         
-        let temp=100000+arc4random()%100000;
-        let order="\(temp)huoshuSDk";
+        let order=dic.getString("game_payorder");
         
         let m=HuoShuSDKMgr.getInstance();
-        m?.openPay(withServerid: serverID, withRoleId: roleID, withPayAmount: payMount, withCallBack: order, withGoodId: goodID, withMoney: money, with: self)
+        m?.openPay(withServerid: server_id, withRoleId: role_id, withPayAmount: "1", withCallBack: order, withGoodId: productId, withMoney: money, with: self);
     }
     
     
@@ -138,12 +134,17 @@ class ViewController: BaseWebViewController,ISDKRouter {
         loadWeb(e.data as! String);
     }
     
+    @objc func sdkRegisterHandle(e:Notification){
+        sdkLoginHandle(e: e);
+    }
     @objc func sdkLoginHandle(e:Notification){
         let dic=HuoShuSDKMgr.getLoginInfo();
         
         if let d=dic{
             let openid=d["openId"];
             d["open_id"]=openid;
+            //print("lo",openid);
+            
             sdk.send(CMD.Login, d);
         }
         
@@ -151,8 +152,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
     }
     @objc func sdkPayHandle(e:Notification){
         let dic=e.object;
-        
-        print(dic!);
+        print("支付结果为:",dic!);
     }
     
     
@@ -161,15 +161,43 @@ class ViewController: BaseWebViewController,ISDKRouter {
         switch c {
         case "enterGameLog":
             let dic=d as! [String:Any];
-            HuoShuSDKMgr.getInstance()?.loginRole(withServerId: dic["server_id"] as? String, withRoleId: dic["role_id"] as? String, withRoleName: dic["nickname"] as? String, withRoleLevel: dic["level"] as? String);
+            
+            let server_id=dic.getString("server_id");
+            let role_id=dic.getString("role_id");
+            let nickname=dic.getString("nickname");
+            let level=dic.getInt("level");
+            
+            HuoShuSDKMgr.getInstance()?.loginRole(withServerId: server_id,
+                                                  withRoleId: role_id,
+                                                  withRoleName:nickname,
+                                                  withRoleLevel: "\(level)");
             
         case "createRoleLog":
             let dic=d as! [String:Any];
-            HuoShuSDKMgr.getInstance()?.createRole(withServerId: dic["server_id"] as? String, withRoleId: dic["role_id"] as? String, withRoleName: dic["nickname"] as? String);
+            let server_id=dic.getString("server_id");
+            let role_id=dic.getString("role_id");
+            let nickname=dic.getString("nickname");
+            //let level=dic["level"] as? String;
+            
+            HuoShuSDKMgr.getInstance()?.createRole(withServerId: server_id,
+                                                   withRoleId: role_id,
+                                                   withRoleName: nickname);
             
         case "levelUpLog":
             let dic=d as! [String:Any];
-            HuoShuSDKMgr.getInstance()?.upgradeRole(withServerId: dic["server_id"] as? String, withRoleId: dic["role_id"] as? String, withRoleName: dic["nickname"] as? String, withRoleLevel: dic["level"] as? String);
+            let server_id=dic.getString("server_id");
+            let role_id=dic.getString("role_id");
+            let nickname=dic.getString("nickname");
+            let level=dic.getString("level");
+            
+            HuoShuSDKMgr.getInstance()?.upgradeRole(withServerId: server_id,
+                                                    withRoleId: role_id,
+                                                    withRoleName: nickname,
+                                                    withRoleLevel: level);
+            
+        case "pay":
+            //路由一下
+            sdk.simpleDispatch(CMD.Pay, d);
             
         default: break
             
