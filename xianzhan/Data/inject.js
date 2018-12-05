@@ -26,3 +26,15 @@ console.warn = function(f){
         f.apply(console,v);
     }
 }(console.warn);
+
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    var m = [
+                   'Message: ' + msg,
+                   'URL: ' + url,
+                   'Line: ' + lineNo,
+                   'Column: ' + columnNo,
+                   'Error stack: ' + error ? error.stack : ''
+                   ].join(' - ');
+    console.error(m);
+}
