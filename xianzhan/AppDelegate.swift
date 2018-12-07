@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          ed00a42b41807d7eafe9e16d01a34afc
          */
         
+        //UIApplication.shared.isStatusBarHidden=true;
+        
         let appid="5bf5042956fec80d6268c787";
         let appkey="280389b0f74f608f354bb595eb2a6d18";
         

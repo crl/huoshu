@@ -20,7 +20,6 @@ class ProductsRequest:EventDispatcher,SKProductsRequestDelegate {
         for item in list {
             set.insert(item);
         }
-        
         let request=SKProductsRequest(productIdentifiers: set);
         request.delegate=self;
         request.start();
@@ -30,6 +29,11 @@ class ProductsRequest:EventDispatcher,SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         for product in response.products {
             dic[product.productIdentifier]=product;
+        }
+        
+        
+        for product in response.invalidProductIdentifiers {
+            print("invalidProduct:"+product);
         }
         self.simpleDispatch(EventX.COMPLETE, dic);
     }

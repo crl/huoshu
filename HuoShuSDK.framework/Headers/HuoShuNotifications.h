@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+extern NSString * const enterGameNotification;
 extern NSString * const huoshuRegisterNotification;
 extern NSString * const huoshuExitNotification;                  /**<  退出 */
 extern NSString * const huoshuLoginNotification;                    /**< 登录完成的通知*/

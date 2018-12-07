@@ -27,6 +27,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         let notifi=NotificationCenter.default;
         notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: NSNotification.Name.huoshuLogin, object: nil);
         notifi.addObserver(self, selector: #selector(sdkPayHandle), name: NSNotification.Name.huoshuPayt, object: nil);
+        notifi.addObserver(self, selector: #selector(sdkEnterHandle), name: NSNotification.Name.enterGame, object: nil);
         notifi.addObserver(self, selector: #selector(sdkRegisterHandle), name: NSNotification.Name.huoshuRegister, object: nil);
         
         sdk.on("load", #selector(doLoad), self);
@@ -86,25 +87,8 @@ class ViewController: BaseWebViewController,ISDKRouter {
     @objc override func doInit(e:EventX) {
         //test;
         super.doInit(e: e);
-        
-        //sdk.send(CMD.Login,["open_id":"123"]);
-        //let m=HuoShuSDKMgr.getInstance();
-        //m?.loginRole(withServerId: <#T##String!#>, withRoleId: <#T##String!#>, withRoleName: <#T##String!#>, withRoleLevel: <#T##String!#>)
-        
         self.present(LoginViewController(), animated: true){
-            
         }
-    }
-    
-    
-    @objc override func doLogin(e:EventX) {
-        GameCenter.Instance.on(EventX.CHANGE, #selector(onLoginHandle), self);
-        GameCenter.Instance.login();
-    }
-    
-    @objc func onLoginHandle(e:EventX){
-        let name=e.data as! String;
-        sdk.send("login", name);
     }
     
     @objc override func doPay(e:EventX) {
@@ -113,9 +97,10 @@ class ViewController: BaseWebViewController,ISDKRouter {
         let productId:String=dic.getString("key");
         print(productId);
         
-        //let iap=IAP.Instance;
-        //iap.add
-        //iap.pay(productId);
+        
+        //productId="com.mmgame.xianzhan11";
+        //IAP.Instance.pay(productId);
+        //return;
         
         let server_id=dic.getString("game_server");
         let role_id=dic.getString("role_id");
@@ -146,7 +131,13 @@ class ViewController: BaseWebViewController,ISDKRouter {
         }
     }
     
-    func doSdkLogin(_ e:Notification){
+    @objc func sdkEnterHandle(e:Notification){
+        DispatchQueue.main.async {
+            self.doSdkLogin(e,true);
+        }
+    }
+    
+    func doSdkLogin(_ e:Notification,_ enter:Bool=false){
         let dic=HuoShuSDKMgr.getLoginInfo();
         
         if let d=dic{
@@ -155,9 +146,11 @@ class ViewController: BaseWebViewController,ISDKRouter {
             if let id=openid {
             
                 d["open_id"]=id;
-                print("openId:",id);
+                print("openId:",id,enter);
                 
-                sdk.send(CMD.Login, d);
+                if enter{
+                    sdk.send(CMD.Login, d);
+                }
             }else{
                 let d="loginInfo:\(d)";
                 Utils.Alert(d);

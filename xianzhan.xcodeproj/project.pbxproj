@@ -621,8 +621,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y58JA4U53L;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = GNYX7GYH8L;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -634,9 +634,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mmgame.xianzhan2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mmgame.xianzhan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = xzDev;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "xianzhan-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -650,10 +650,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y58JA4U53L;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = GNYX7GYH8L;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -666,9 +666,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mmgame.xianzhan2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mmgame.xianzhan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = xzDis;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "xianzhan-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
