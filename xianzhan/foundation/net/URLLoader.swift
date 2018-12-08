@@ -83,7 +83,7 @@ class URLLoader: EventDispatcher,URLSessionDelegate {
         return String(data: data!, encoding: .utf8)!;
     }
     
-    
+    //URLSessionDelegate
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
         
         guard let serverTrust = challenge.protectionSpace.serverTrust else {
