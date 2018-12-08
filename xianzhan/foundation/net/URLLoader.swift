@@ -86,7 +86,9 @@ class URLLoader: EventDispatcher,URLSessionDelegate {
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
         
-        guard let serverTrust = challenge.protectionSpace.serverTrust else { return completionHandler(.useCredential, nil) }
+        guard let serverTrust = challenge.protectionSpace.serverTrust else {
+            return completionHandler(.useCredential, nil);
+        }
         let exceptions = SecTrustCopyExceptions(serverTrust);
         SecTrustSetExceptions(serverTrust, exceptions);
         completionHandler(.useCredential, URLCredential(trust: serverTrust));

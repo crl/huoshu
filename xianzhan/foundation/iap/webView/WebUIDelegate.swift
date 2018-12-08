@@ -66,7 +66,9 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
     }
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
         
-        guard let serverTrust = challenge.protectionSpace.serverTrust else { return completionHandler(.useCredential, nil) }
+        guard let serverTrust = challenge.protectionSpace.serverTrust else {
+            return completionHandler(.useCredential, nil);
+        }
         let exceptions = SecTrustCopyExceptions(serverTrust);
         SecTrustSetExceptions(serverTrust, exceptions);
         completionHandler(.useCredential, URLCredential(trust: serverTrust));
