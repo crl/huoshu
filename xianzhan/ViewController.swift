@@ -11,13 +11,12 @@ import WebKit;
 
 class ViewController: BaseWebViewController,ISDKRouter {
     
-    private var rootURL="https://xz-hf-ios.fire233.com/index.html";
+    private var rootURL="https://xz-hf-ios.fire233.com/index.html?mask=1";
     
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        TickManager.Start();
-        
+        //TickManager.Start();
         //TickManager.Add(self);
         /*Singleton.Register(TestMediator.self);
          let t=Facade.GetMediator(TestMediator.self);
@@ -33,7 +32,9 @@ class ViewController: BaseWebViewController,ISDKRouter {
         sdk.on("load", #selector(doLoad), self);
         sdk.router=self;
         
-        let loader=URLLoader("https://xz-hf-dev.fire233.com/web.xml");
+        let time=Date.timeIntervalSinceReferenceDate;
+        let t=Int(time);
+        let loader=URLLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
         loader.defaultEvent(#selector(configHandle),self);
         loader.load();
     }
@@ -48,13 +49,12 @@ class ViewController: BaseWebViewController,ISDKRouter {
             self.enterGame();
             return;
         }
-        //_=e.target as! URLLoader;
+        
+        let key="web.root\(Utils.GetAppVersion())";
         
         let xml=e.data as! Data;
         let dic=XMLUtil.SimpleParse(xml: xml);
         
-        
-        let key="web.root\(Utils.GetAppVersion())";
         let url:String?=dic[key]?.value;
         
         if let u=url{
@@ -67,7 +67,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
     
     func enterGame() {
         //test;
-        //rootURL="http://192.168.2.43:6060/simple.html";
+        /////////rootURL="http://192.168.2.43:6060/simple.html?mask=1";
         
         let time=Date.timeIntervalSinceReferenceDate;
         let t=Int(time);
@@ -94,13 +94,11 @@ class ViewController: BaseWebViewController,ISDKRouter {
     @objc override func doPay(e:EventX) {
         let dic=e.data as! [String:Any];
         
-        let productId:String=dic.getString("key");
-        print(productId);
-        
-        
-        //productId="com.mmgame.xianzhan11";
+        let productId=dic.getString("key");
         //IAP.Instance.pay(productId);
         //return;
+        
+        print(productId);
         
         let server_id=dic.getString("game_server");
         let role_id=dic.getString("role_id");

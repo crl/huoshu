@@ -28,6 +28,8 @@ console.warn = function(f){
 }(console.warn);
 
 
-window.onerror = function () {
-    console.error.apply(console,arguments);
+window.onerror = function (message, source, lineno, colno, error) {
+    var v=arguments;
+    var str=JSON.stringify({c:"windowError",d:v});
+    window.webkit.messageHandlers.ios.postMessage(str);
 }

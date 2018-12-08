@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URLLoader: EventDispatcher {
+class URLLoader: EventDispatcher,URLSessionDelegate {
     let url:String!;
     var request:URLRequest!;
     
@@ -49,14 +49,19 @@ class URLLoader: EventDispatcher {
         start(request);
     }
     
+    var session:URLSession!;
     
     private func start(_ request:URLRequest){
-        let session=URLSession.shared;
+        //let session=URLSession.shared;
+        
+        if session == nil{
+            let configer = URLSessionConfiguration.default;
+            session = Foundation.URLSession(configuration: configer, delegate: self, delegateQueue: OperationQueue.main);
+        }
+        
         let task=session.dataTask(with: request) { (data, response, error) in
             if(error != nil){
-                //todo
                 self.data=Data(base64Encoded: error.debugDescription);
-                
                 self.simpleDispatch(EventX.ERROR, error.debugDescription);
                 return;
             }
@@ -76,5 +81,14 @@ class URLLoader: EventDispatcher {
             return "";
         }
         return String(data: data!, encoding: .utf8)!;
+    }
+    
+    
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
+        
+        guard let serverTrust = challenge.protectionSpace.serverTrust else { return completionHandler(.useCredential, nil) }
+        let exceptions = SecTrustCopyExceptions(serverTrust);
+        SecTrustSetExceptions(serverTrust, exceptions);
+        completionHandler(.useCredential, URLCredential(trust: serverTrust));
     }
 }

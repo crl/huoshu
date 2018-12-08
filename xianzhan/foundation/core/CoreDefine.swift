@@ -43,10 +43,10 @@ func Equatable(_ f:AnyObject,_ t:AnyObject)->Bool{
 
 extension Dictionary{
     
-    func getString(_ key:Key,def:String="") -> String! {
+    func getString(_ key:Key,def:String="") -> String {
         let o=self[key];
         if (o != nil) {
-            return String(describing: o);
+            return String(describing: o!);
         }
         return def;
     }

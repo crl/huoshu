@@ -55,7 +55,7 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
         if(navigationResponse.response .isKind(of: HTTPURLResponse.self)){
             let response = navigationResponse.response as! HTTPURLResponse
             if(response.statusCode == 401){
-                print("error")
+                print("error 404")
             }
         }
         decisionHandler(WKNavigationResponsePolicy.allow);
@@ -63,6 +63,13 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error){
         print(error);
+    }
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
+        
+        guard let serverTrust = challenge.protectionSpace.serverTrust else { return completionHandler(.useCredential, nil) }
+        let exceptions = SecTrustCopyExceptions(serverTrust);
+        SecTrustSetExceptions(serverTrust, exceptions);
+        completionHandler(.useCredential, URLCredential(trust: serverTrust));
     }
     
     private var errorImage:UIImage?;
@@ -89,6 +96,8 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
         
         print("WKWebView",error);
     }
+    
+   
     
     @objc func refreshHandle(e:UITapGestureRecognizer) {
         
