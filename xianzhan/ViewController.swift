@@ -11,7 +11,7 @@ import WebKit;
 
 class ViewController: BaseWebViewController,ISDKRouter {
     
-    private var rootURL="https://xz-hf-ios.fire233.com/index.html?mask=1";
+    private var rootURL="https://xz-ios-usa.fire233.com/index.html?mask=1";
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -59,8 +59,13 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         if let u=url{
             rootURL=u;
+        }else{
+            //default url;
+            let defurl=dic["web.def"]?.value;
+            if let u=defurl{
+                rootURL=u;
+            }
         }
-        
         self.enterGame();
     }
     
