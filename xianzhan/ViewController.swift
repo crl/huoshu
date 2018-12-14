@@ -72,7 +72,8 @@ class ViewController: BaseWebViewController,ISDKRouter {
     
     func enterGame() {
         //test;
-        /////////rootURL="http://192.168.2.43:6060/simple.html?mask=1";
+        //rootURL="http://192.168.2.43:6060/simple.html?mask=1";
+        //rootURL="http://game.fire2333.com/home/ac?action=/home/game/a/1111/g/200053";
         
         let time=Date.timeIntervalSinceReferenceDate;
         let t=Int(time);

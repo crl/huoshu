@@ -54,5 +54,7 @@
                  withMoney:(NSString *)money
             withController:(UIViewController *)controller;
 
+
+-(void)afterAuthSuccess:(NSNotification *)notification;
 @end
 

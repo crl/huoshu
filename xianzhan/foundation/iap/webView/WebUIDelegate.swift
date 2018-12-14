@@ -50,7 +50,27 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
         //Utils.ShowImage("bg.png",false);
         Utils.Loading(false);
     }
-    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void){
+        
+        guard let tempUrl=navigationAction.request.url else {
+            decisionHandler(.allow);
+            return;
+        }
+        
+        let url=Utils.handlePayURL(tempUrl);
+        if let url=url {
+            decisionHandler(.cancel);
+            print("pay:",url);
+            UIApplication.shared.open(url, options: [:]) { (success) in
+                if success == false{
+                    //UIApplication.shared.openURL(url);
+                }
+            }
+            return;
+        }
+        
+        decisionHandler(.allow);
+    }
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         if(navigationResponse.response .isKind(of: HTTPURLResponse.self)){
             let response = navigationResponse.response as! HTTPURLResponse

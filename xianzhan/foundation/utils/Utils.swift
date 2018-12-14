@@ -117,5 +117,37 @@ class Utils: NSObject {
     }
     
     
-   
+    static func handlePayURL(_ url:URL)->URL?{
+        let uri=url.absoluteString;
+        let alipay="alipay://alipayclient/";
+        if uri.hasPrefix(alipay){
+            
+            var decodePar:String!=url.query ?? "";
+            decodePar=decodePar.removingPercentEncoding;
+            var dic=JSONUtil.Decode(decodePar);
+            dic["fromAppUrlScheme"]="com.mmgame.xianzhan";
+            
+            decodePar=JSONUtil.Encode(dic);
+            decodePar=decodePar.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
+            
+            let finalStr="\(alipay)?\(decodePar ?? "")";
+            
+            if let finalUrl=URL(string: finalStr){
+                return finalUrl;
+            }
+            
+            return nil;
+        }
+        
+        if uri.hasPrefix("weixin://"){
+            
+            return url;
+        }
+        
+        
+        return nil;
+    }
+     static func handlePayBackURL(_ url:URL){
+        print("payback:",url);
+    }
 }

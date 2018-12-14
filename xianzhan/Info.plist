@@ -17,11 +17,48 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5</string>
+	<string>1.7</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>83.5x83.5@2x</string>
+			<key>CFBundleURLName</key>
+			<string>com.mmgame.xianzhan</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.mmgame.xianzhan</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>weibosdk</string>
+		<string>pcbabybrowserbeta</string>
+		<string>pcbabybrowserpub</string>
+		<string>tencentopenapi</string>
+		<string>mqzone</string>
+		<string>wtloginmqq2</string>
+		<string>mqqbrowser</string>
+		<string>mqqwpa</string>
+		<string>mqqapi</string>
+		<string>mqq</string>
+		<string>mqqopensdkapiV3</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqopensdkapiV2</string>
+		<string>qqplugin</string>
+		<string>sinaweibo</string>
+		<string>weixin</string>
+		<string>taobao</string>
+		<string>tmall</string>
+		<string>openApp.jdMobile</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
