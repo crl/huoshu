@@ -20,6 +20,10 @@ extern NSString * const huoshuErrorNotification;                 /**<  出错 */
 
 extern NSString * const huoshuPayResultNotification;            /**<  查看支付结果，客户端不要以此发元宝，以服务器通知为准*/
 
+extern NSString * const huoshuMonitorNotification;                 /**<  监听支付*/
+
+extern NSString * const huoshuOrderListNotification;            /**<  已扣钱但是未发元宝的的订单，对应值是cp的透传参数,需要通知cp，对应本地的状态为paySuccess*/
+
 
 @interface HuoShuNotifications : NSObject
 

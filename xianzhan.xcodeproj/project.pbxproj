@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C23332421B790EB008AEFA3 /* 60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C23332321B790EB008AEFA3 /* 60x60@2x.png */; };
-		0C23332721B79175008AEFA3 /* 83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C23332521B79175008AEFA3 /* 83.5x83.5@2x.png */; };
-		0C23332821B79175008AEFA3 /* 76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C23332621B79175008AEFA3 /* 76x76@2x.png */; };
 		0C23332A21B795E7008AEFA3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C23332921B795E7008AEFA3 /* StoreKit.framework */; };
 		0C3826DF21A6CA0F00EA5834 /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 0C3826DE21A6CA0F00EA5834 /* inject.js */; };
-		0C3826E121A6D28F00EA5834 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C3826E021A6D28F00EA5834 /* icon.png */; };
 		0C4B20A021915A100062E44B /* Mediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B209F21915A100062E44B /* Mediator.swift */; };
 		0C4B20A221915A2C0062E44B /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20A121915A2C0062E44B /* Proxy.swift */; };
 		0C4B20A52191744C0062E44B /* JSSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20A42191744C0062E44B /* JSSDK.swift */; };
@@ -77,12 +73,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C23332321B790EB008AEFA3 /* 60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60x60@2x.png"; sourceTree = "<group>"; };
-		0C23332521B79175008AEFA3 /* 83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "83.5x83.5@2x.png"; sourceTree = "<group>"; };
-		0C23332621B79175008AEFA3 /* 76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "76x76@2x.png"; sourceTree = "<group>"; };
 		0C23332921B795E7008AEFA3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0C3826DE21A6CA0F00EA5834 /* inject.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
-		0C3826E021A6D28F00EA5834 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		0C4B209F21915A100062E44B /* Mediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mediator.swift; sourceTree = "<group>"; };
 		0C4B20A121915A2C0062E44B /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
 		0C4B20A42191744C0062E44B /* JSSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSSDK.swift; sourceTree = "<group>"; };
@@ -250,11 +242,7 @@
 		0C5EF43821A522CF00FDD405 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0C23332621B79175008AEFA3 /* 76x76@2x.png */,
-				0C23332521B79175008AEFA3 /* 83.5x83.5@2x.png */,
-				0C23332321B790EB008AEFA3 /* 60x60@2x.png */,
 				0C6250E021A6DF9200E9998A /* bg.png */,
-				0C3826E021A6D28F00EA5834 /* icon.png */,
 				0C3826DE21A6CA0F00EA5834 /* inject.js */,
 				0C5EF43921A523CB00FDD405 /* 404.jpg */,
 			);
@@ -423,15 +411,11 @@
 			files = (
 				0CE201EA21901026006C6FF0 /* LaunchScreen.storyboard in Resources */,
 				0CE201E721901026006C6FF0 /* Assets.xcassets in Resources */,
-				0C3826E121A6D28F00EA5834 /* icon.png in Resources */,
-				0C23332421B790EB008AEFA3 /* 60x60@2x.png in Resources */,
 				0C74E3D121AC2E420084CEA8 /* Resources.bundle in Resources */,
 				0C6250E121A6DF9200E9998A /* bg.png in Resources */,
 				0C5EF43A21A523CB00FDD405 /* 404.jpg in Resources */,
-				0C23332821B79175008AEFA3 /* 76x76@2x.png in Resources */,
 				0C3826DF21A6CA0F00EA5834 /* inject.js in Resources */,
 				0CE201E521901024006C6FF0 /* Main.storyboard in Resources */,
-				0C23332721B79175008AEFA3 /* 83.5x83.5@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
