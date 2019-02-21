@@ -42,6 +42,9 @@
     
     BOOL isDebug;
     
+    // 是否提审中，后续需要从后端获取
+    BOOL isSubmiting;
+    
 }
 
 //是否需要登录,默认为yes需要
@@ -75,6 +78,7 @@
 
 @property(assign,nonatomic) BOOL isDebug;
 
+@property(assign,nonatomic) BOOL isSubmiting;
 + (TypeSetting *)getInstance;
 
 // 所有接口都需要传的公共字段

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const switchAccountNotification;
 extern NSString * const enterGameNotification;
 extern NSString * const huoshuRegisterNotification;
 extern NSString * const huoshuExitNotification;                  /**<  退出 */

@@ -23,6 +23,27 @@ class ViewController: BaseWebViewController,ISDKRouter {
          t.hello("crl");
          */
         
+        /**
+         游戏标识(app_id)：
+         5bf5042956fec80d6268c787
+         游戏密钥管理
+         客户端密钥：(app_client_key)
+         280389b0f74f608f354bb595eb2a6d18
+         服务端密钥：(app_server_key)
+         ed00a42b41807d7eafe9e16d01a34afc
+         */
+        
+        //UIApplication.shared.isStatusBarHidden=true;
+        
+        let appid="5bf5042956fec80d6268c787";
+        let appkey="280389b0f74f608f354bb595eb2a6d18";
+        
+        print("sdk ver:",HuoShuSDKVersionNumber)
+        
+        
+        HuoShuSDKMgr.huoShuSDKInit(withApp_id: appid, withAppKey: appkey, withGameVer: "1.0.1", withIsRequireLogin: true,with: self);
+        
+        
         let notifi=NotificationCenter.default;
         notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: NSNotification.Name.huoshuLogin, object: nil);
         notifi.addObserver(self, selector: #selector(sdkPayHandle), name: NSNotification.Name.huoshuPayt, object: nil);

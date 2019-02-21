@@ -22,7 +22,10 @@
 +(void) huoShuSDKInitWithApp_id:(NSString *)appId
                      withAppKey:(NSString *)appKey
                     withGameVer:(NSString *)gameVer
-             withIsRequireLogin:(BOOL)isRequireLogin;
+             withIsRequireLogin:(BOOL)isRequireLogin
+             withViewController:(UIViewController *)viewController;
+
+- (void)openLoginWithController: (UIViewController *)controller;
 
 
 
@@ -56,5 +59,10 @@
 
 
 -(void)afterAuthSuccess:(NSNotification *)notification;
+
+-(void)afterGetProductInfo:(NSNotification *)notification;
+-(void)afterGetEnterCenterNotify:(NSNotification *)notification;
+-(void)afterGetEnterContactHelperNotify:(NSNotification *)notification;
+-(UIViewController *)getVc;
 @end
 
