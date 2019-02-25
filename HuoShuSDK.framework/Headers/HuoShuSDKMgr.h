@@ -64,9 +64,5 @@
 -(void)afterGetEnterCenterNotify:(NSNotification *)notification;
 -(void)afterGetEnterContactHelperNotify:(NSNotification *)notification;
 -(UIViewController *)getVc;
-
-// 支付成功通知到客户端，客户端需要通知SDK，SDK将相关订单关闭 form 单机
--(void)payNotificationForCustom:(NSArray *)orderNumArray;
-
 @end
 
