@@ -121,11 +121,18 @@ class ViewController: BaseWebViewController,ISDKRouter {
     @objc override func doPay(e:EventX) {
         let dic=e.data as! [String:Any];
         
-        let productId=dic.getString("key");
+        let productRawId=dic.getString("key");
         //IAP.Instance.pay(productId);
         //return;
         
-        print(productId);
+        
+        
+        let replaceKey="com.mmgame.xianzhan";
+        let withKey=Utils.GetBundleIdentifier();
+        
+        let productId=productRawId.replacingOccurrences(of: replaceKey, with: withKey);
+        print("\(productId)=\(productRawId)");
+        
         
         let server_id=dic.getString("game_server");
         let role_id=dic.getString("role_id");
@@ -189,7 +196,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         print("支付结果为:",dic!);
     }
     
-    
+    private var lastServer_id:String="";
     
     func receipt(_ c: String, _ d:Any) {
         switch c {
@@ -201,6 +208,11 @@ class ViewController: BaseWebViewController,ISDKRouter {
             let nickname=dic.getString("nickname");
             let level=dic.getInt("level");
             
+            if server_id == lastServer_id {
+                print("duplicate:"+c);
+                return;
+            }
+            lastServer_id=server_id;
             HuoShuSDKMgr.getInstance()?.loginRole(withServerId: server_id,
                                                   withRoleId: role_id,
                                                   withRoleName:nickname,
