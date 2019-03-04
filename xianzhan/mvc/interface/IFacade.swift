@@ -14,7 +14,7 @@ enum InjectEventType:String{
     case Proxy="p"
 }
 
-protocol IFacade : IEventDispatcher{
+protocol IFacade : IEventDispatcherX{
     func registerProxy(_ proxy:Proxy) -> Bool;
     func registerMediator(_ mediator:Mediator) -> Bool;
     
@@ -24,7 +24,7 @@ protocol IFacade : IEventDispatcher{
     func getProxy<T:Proxy>(_ type:T.Type) -> T;
     func getMediator<T:Mediator>(_ type:T.Type) -> T;
     
-    func registerEventInsterester(_ target:IEventInterester,_ type:InjectEventType,_ isBind:Bool,_ dispatcher:IEventDispatcher?);
+    func registerEventInsterester(_ target:IEventInterester,_ type:InjectEventType,_ isBind:Bool,_ dispatcher:IEventDispatcherX?);
 }
 
 protocol IMediator:IMVCHost{
@@ -38,7 +38,7 @@ protocol IProxy:IMVCHost {
     
 }
 
-protocol IPanel:IAsync,IEventDispatcher {
+protocol IPanel:IAsync,IEventDispatcherX {
     var isShow:Bool{get};
 }
 
@@ -59,7 +59,7 @@ protocol IAsync {
     func addReadyHandle(handle:Selector,selfObj:AnyObject);
 }
 
-protocol IMVCHost:IAsync,IEventDispatcher,IEventInterester {
+protocol IMVCHost:IAsync,IEventDispatcherX,IEventInterester {
     var name:String{
         get
     }
@@ -74,9 +74,9 @@ class InjectEventTypeHandle:NSObject {
     var events:[String]! = nil;
 }
 
-class MVCHost:EventDispatcher,IMVCHost {
+class MVCHost:EventDispatcherX,IMVCHost {
     var facade:IFacade;
-    private var readyHandles:[ListenerBox<EventX>]?=nil;
+    private var readyHandles:[ListenerItem<EventX>]?=nil;
     
     var __eventInteresting: [String : [InjectEventTypeHandle]]?
     var eventInteresting:[String:[InjectEventTypeHandle]]?{
@@ -137,7 +137,7 @@ class MVCHost:EventDispatcher,IMVCHost {
                 return;
             }
         }
-        let e=ListenerBox<EventX>();
+        let e=ListenerItem<EventX>();
         e.handle=handle;
         e.selfObj=selfObj;
         readyHandles!.append(e);

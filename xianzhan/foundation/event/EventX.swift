@@ -59,8 +59,8 @@ class EventX: NSObject {
         }
     }
     
-    private var _target:IEventDispatcher!=nil;
-    var target:IEventDispatcher{
+    private var _target:IEventDispatcherX!=nil;
+    var target:IEventDispatcherX{
         get{
             return _target;
         }
@@ -82,7 +82,7 @@ class EventX: NSObject {
         self.data = data;
     }
     
-    func setTarget(_ value:IEventDispatcher) {
+    func setTarget(_ value:IEventDispatcherX) {
         self._target=value;
     }
     

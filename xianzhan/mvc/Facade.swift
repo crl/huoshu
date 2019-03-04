@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Facade: EventDispatcher,IFacade {
+class Facade: EventDispatcherX,IFacade {
     
     private var mvcInjectLock:[String:IMVCHost];
     private var mediators:View<Mediator>;
@@ -81,13 +81,13 @@ class Facade: EventDispatcher,IFacade {
     }
     
     
-    func registerEventInsterester(_ target: IEventInterester, _ type: InjectEventType, _ isBind: Bool,_ dispatcher:IEventDispatcher?=nil) {
+    func registerEventInsterester(_ target: IEventInterester, _ type: InjectEventType, _ isBind: Bool,_ dispatcher:IEventDispatcherX?=nil) {
         
         let l=target.getEventInteresting(type);
         guard let t=l else {
             return;
         }
-        var dis:IEventDispatcher!=dispatcher;
+        var dis:IEventDispatcherX!=dispatcher;
         if dis == nil{
             dis=self;
         }

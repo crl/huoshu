@@ -21,7 +21,7 @@ protocol ISDKRouter {
     func receipt(_ c:String,_ d:Any)->Void;
 }
 
-class JSSDK: EventDispatcher {
+class JSSDK: EventDispatcherX {
     
     private var webView:WKWebView!;
     
@@ -49,7 +49,7 @@ class JSSDK: EventDispatcher {
         t["c"]=c;
         t["d"]=d;
         
-        let command=JSONUtil.Encode(t);
+        let command=JSONUtils.Encode(t);
         
         let cmd="PlatformSDK.Receive('\(command)')";
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JSONUtil {    
+class JSONUtils {    
     static func Encode(_ data:Any) -> String {
         
         do {

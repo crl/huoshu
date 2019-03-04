@@ -10,7 +10,7 @@ import UIKit
 import StoreKit;
 
 
-class ProductsRequest:EventDispatcher,SKProductsRequestDelegate {
+class ProductsRequest:EventDispatcherX,SKProductsRequestDelegate {
     var dic:[String:SKProduct]=[:];
     
     func load(listString:String) {

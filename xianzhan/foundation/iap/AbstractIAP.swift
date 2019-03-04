@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit;
 
-class AbstractIAP: EventDispatcher,SKPaymentTransactionObserver {
+class AbstractIAP: EventDispatcherX,SKPaymentTransactionObserver {
     var productsRequest:ProductsRequest!;
     var paymentQueue:SKPaymentQueue!;
     
@@ -25,7 +25,7 @@ class AbstractIAP: EventDispatcher,SKPaymentTransactionObserver {
         
         let canMakePayments=SKPaymentQueue.canMakePayments();
         if canMakePayments == false {
-            Utils.Alert("不能支付");
+            AppUtils.Alert("不能支付");
             return;
         }
         
@@ -89,7 +89,7 @@ class AbstractIAP: EventDispatcher,SKPaymentTransactionObserver {
     
     
     func showLoading(_ v:Bool) {
-        Utils.Loading(v);
+        AppUtils.Loading(v);
     }
     
     //to override;

@@ -55,7 +55,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         let time=Date.timeIntervalSinceReferenceDate;
         let t=Int(time);
-        let loader=URLLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
+        let loader=URLRequestLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
         loader.defaultEvent(#selector(configHandle),self);
         loader.load();
     }
@@ -67,14 +67,14 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         if e.type != EventX.COMPLETE
         {
-            self.enterGame();
+            self.enterToGame();
             return;
         }
         
-        let key="web.root\(Utils.GetAppVersion())";
+        let key="web.root\(AppUtils.GetAppVersion())";
         
         let xml=e.data as! Data;
-        let dic=XMLUtil.SimpleParse(xml: xml);
+        let dic=XMLUtils.SimpleParse(xml: xml);
         
         let url:String?=dic[key]?.value;
         
@@ -87,11 +87,11 @@ class ViewController: BaseWebViewController,ISDKRouter {
                 rootURL=u;
             }
         }
-        self.enterGame();
+        self.enterToGame();
     }
     
     
-    func enterGame() {
+    func enterToGame() {
         //test;
         //rootURL="http://192.168.2.43:6060/simple.html?mask=1";
         //rootURL="http://game.fire2333.com/home/ac?action=/home/game/a/1111/g/200053";
@@ -128,7 +128,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         
         let replaceKey="com.mmgame.xianzhan";
-        let withKey=Utils.GetBundleIdentifier();
+        let withKey=AppUtils.GetBundleIdentifier();
         
         let productId=productRawId.replacingOccurrences(of: replaceKey, with: withKey);
         print("\(productId)=\(productRawId)");
@@ -185,7 +185,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
                 }
             }else{
                 let d="loginInfo:\(d)";
-                Utils.Alert(d);
+                AppUtils.Alert(d);
             }
         }
         

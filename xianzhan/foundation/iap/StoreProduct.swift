@@ -20,7 +20,7 @@ class StoreProduct: NSObject,SKStoreProductViewControllerDelegate {
     func load(appID:String){
         storeView.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier:appID]) { (result, error) in
             if(result){
-                Utils.Present(self.storeView, animated: true, completion: nil);
+                AppUtils.Present(self.storeView, animated: true, completion: nil);
             }else if(error != nil){
                 print("error: %@",error!);
             }

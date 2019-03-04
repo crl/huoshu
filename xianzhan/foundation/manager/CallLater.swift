@@ -17,9 +17,9 @@ class CallLater: NSObject,ITickable {
     }
     
 
-    static var list:[ListenerBoxData<DispatchTime>]=[];
+    static var list:[ListenerItemRef<DispatchTime>]=[];
     
-    static func Add(_ handle:Selector,selfObj:AnyObject,_ delay:DispatchTimeInterval) -> Bool{
+    static func AddItem(_ handle:Selector,selfObj:AnyObject,_ delay:DispatchTimeInterval) -> Bool{
         
         let t=DispatchTime.now()+delay;
         
@@ -29,19 +29,19 @@ class CallLater: NSObject,ITickable {
             return true;
         }
         
-        let item=ListenerBoxData<DispatchTime>();
+        let item=ListenerItemRef<DispatchTime>();
         item.handle=handle;
         item.selfObj=selfObj;
         item.data=t;
         
         if(list.count==1){
-            TickManager.Add(Instance);
+            TickManager.AddItem(Instance);
         }
         
         return true;
     }
     
-    static func Remove(_ handle:Selector,selfObj:AnyObject?)->Bool{
+    static func RemoveItem(_ handle:Selector,selfObj:AnyObject?)->Bool{
         
         let index=list.firstIndex{ $0.equal(handle, selfObj)};
         
@@ -49,7 +49,7 @@ class CallLater: NSObject,ITickable {
             list.remove(at: index);
             
             if(list.count==0){
-                TickManager.Remove(Instance);
+                TickManager.RemoveItem(Instance);
             }
             
             return true;

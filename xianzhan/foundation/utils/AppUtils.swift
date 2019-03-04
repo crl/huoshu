@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit;
 
-class Utils: NSObject {
+class AppUtils: NSObject {
     
     static func GetRoot()->UIViewController{
         let w = UIApplication.shared.delegate?.window;
@@ -35,7 +35,7 @@ class Utils: NSObject {
             loadingBar?.backgroundColor=clr;
         }
         
-        if let view=Utils.GetRoot().view{
+        if let view=AppUtils.GetRoot().view{
             view.addSubview(loadingBar!);
         }
         
@@ -61,7 +61,7 @@ class Utils: NSObject {
         if b && view == nil{
             let path=Bundle.main.path(forResource: key, ofType: nil);
             
-            if FileUtil.Exists(path!){
+            if IOUtils.Exists(path!){
                 let image=UIImage(contentsOfFile: path!);
                 
                 let imageView=UIImageView(image: image!);
@@ -76,7 +76,7 @@ class Utils: NSObject {
         if let v=view{
             
             if b{
-            if let r=Utils.GetRoot().view{
+            if let r=AppUtils.GetRoot().view{
                 r.addSubview(v);
             }
             }else{
@@ -141,10 +141,10 @@ class Utils: NSObject {
             
             var decodePar:String!=url.query ?? "";
             decodePar=decodePar.removingPercentEncoding;
-            var dic=JSONUtil.Decode(decodePar);
+            var dic=JSONUtils.Decode(decodePar);
             dic["fromAppUrlScheme"]="com.mmgame.xianzhan";
             
-            decodePar=JSONUtil.Encode(dic);
+            decodePar=JSONUtils.Encode(dic);
             decodePar=decodePar.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
             
             let finalStr="\(alipay)?\(decodePar ?? "")";

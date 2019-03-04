@@ -15,7 +15,7 @@ protocol ITickable:NSObjectProtocol {
 
 class TickManager: NSObject {
 
-    private static var list:[ListenerBox<DispatchTime>]=[];
+    private static var list:[ListenerItem<DispatchTime>]=[];
     private static var listType:[ITickable]=[];
     private static var timer:Timer!;
     
@@ -46,7 +46,7 @@ class TickManager: NSObject {
     
     
     @discardableResult
-    static func Add(_ tickable:ITickable)->Bool{
+    static func AddItem(_ tickable:ITickable)->Bool{
         let has = listType.contains{$0 === tickable};
         if has{
             return false;
@@ -56,7 +56,7 @@ class TickManager: NSObject {
     }
     
     @discardableResult
-    static func Remove(_ tickable:ITickable)->Bool{
+    static func RemoveItem(_ tickable:ITickable)->Bool{
         let index=listType.firstIndex{ $0===tickable};
         
         if let index=index{
@@ -75,7 +75,7 @@ class TickManager: NSObject {
             return false;
         }
         
-        let item=ListenerBox<DispatchTime>();
+        let item=ListenerItem<DispatchTime>();
         item.handle=handle;
         item.selfObj=selfObj;
         list.append(item);

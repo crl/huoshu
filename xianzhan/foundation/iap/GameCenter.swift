@@ -9,7 +9,7 @@
 import UIKit
 import GameKit;
 
-class GameCenter:EventDispatcher,GKGameCenterControllerDelegate {
+class GameCenter:EventDispatcherX,GKGameCenterControllerDelegate {
     var gameCenterEnabled:Bool=false;
     
     var playerID:String?;
@@ -34,7 +34,7 @@ class GameCenter:EventDispatcher,GKGameCenterControllerDelegate {
     
     func authenticateHandler(vc:UIViewController?, error:Error?){
         if(vc != nil) {
-            Utils.Present(vc!, animated: true, completion: nil)
+            AppUtils.Present(vc!, animated: true, completion: nil)
             return;
         }
         

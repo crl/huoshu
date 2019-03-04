@@ -21,21 +21,21 @@ class IAP: AbstractIAP {
         
         let data=getPostData(receipt);
         
-        let loader=URLLoader(url);
+        let loader=URLRequestLoader(url);
         loader.ons(EventX.COMPLETE,EventX.ERROR, handle: #selector(loaderHandle), self);
         loader.post(data);
     }
     
     //服务端数据返回
     @objc func loaderHandle(e:EventX){
-        let loader=e.target as! URLLoader;
+        let loader=e.target as! URLRequestLoader;
         loader.offs(EventX.COMPLETE,EventX.ERROR, handle: #selector(loaderHandle), self);
         
         if(e.type != EventX.COMPLETE){
             return;
         }
         
-        let dic=JSONUtil.Decode(loader.getDataString());
+        let dic=JSONUtils.Decode(loader.getDataString());
         
         let code=Int(dic["code"] as! String);
         
@@ -66,28 +66,28 @@ class IAP: AbstractIAP {
     
     func saveData(_ data:String){
         let fileName=UUID().uuidString+".plist";
-        let prefix=FileUtil.GetDomDirectory("store");
-        let fullPath=FileUtil.GetFullPath(fileName, prefix);
-        FileUtil.WriteString(data, fullPath: fullPath);
+        let prefix=IOUtils.GetDomDirectory("store");
+        let fullPath=IOUtils.GetFullPath(fileName, prefix);
+        IOUtils.WriteString(data, fullPath: fullPath);
     }
     
     //验证receipt失败,App启动后再次验证
     func sendFailedIapFiles(){
-        let prefix=FileUtil.GetDomDirectory("store");
-        let list=FileUtil.GetFiles(prefix.path);
+        let prefix=IOUtils.GetDomDirectory("store");
+        let list=IOUtils.GetFiles(prefix.path);
         for item in list{
             //如果有plist后缀的文件，说明就是存储的购买凭证
             if(item.hasSuffix(".plist")){
-                let filePath=FileUtil.GetFullPath(item, prefix);
+                let filePath=IOUtils.GetFullPath(item, prefix);
                 self.sendIapReceipt(filePath);
             }
         }
     }
     
     func sendIapReceipt(_ fullPath:String) {
-        let dic=FileUtil.ReadString(fullPath);
+        let dic=IOUtils.ReadString(fullPath);
         if(dic.isEmpty){
-            FileUtil.RemoveFile(fullPath);
+            IOUtils.RemoveFile(fullPath);
             return;
         }
         //self.requestGameServer(postURL: postURL, post: post, failSave: false, deletePath: path, retryCount: 0);

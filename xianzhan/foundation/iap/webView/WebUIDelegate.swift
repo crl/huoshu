@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
+class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
     
     private var webView:WKWebView!;
     let view:UIViewController;
@@ -31,7 +31,7 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
         
         let path=Bundle.main.path(forResource: "inject", ofType: "js");
         if let t=path {
-            let jsCode=FileUtil.ReadString(t);
+            let jsCode=IOUtils.ReadString(t);
             
             if !jsCode.isEmpty{
                 let script=WKUserScript(source: jsCode, injectionTime: .atDocumentEnd, forMainFrameOnly: true);
@@ -44,11 +44,11 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
     //WKNavigationDelegate
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         //Utils.ShowImage("bg.png");
-        Utils.Loading(true);
+        AppUtils.Loading(true);
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         //Utils.ShowImage("bg.png",false);
-        Utils.Loading(false);
+        AppUtils.Loading(false);
     }
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void){
         
@@ -57,7 +57,7 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
             return;
         }
         
-        let url=Utils.handlePayURL(tempUrl);
+        let url=AppUtils.handlePayURL(tempUrl);
         if let url=url {
             decisionHandler(.cancel);
             print("pay:",url);
@@ -113,7 +113,7 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
         }
         
         //Utils.ShowImage("bg.png",false);
-        Utils.Loading(false);
+        AppUtils.Loading(false);
         webView.addSubview(imageView);
         
         print("WKWebView",error);
@@ -135,7 +135,7 @@ class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavig
     //WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
         let command:String=message.body as! String;
-        let cmd=JSONUtil.Decode(command);
+        let cmd=JSONUtils.Decode(command);
         if cmd.count == 0 {
             return;
         }

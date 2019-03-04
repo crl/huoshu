@@ -8,8 +8,8 @@
 
 import UIKit
 
-class EventDispatcher: NSObject,IEventDispatcher {
-    private var eventsMap:[String:[ListenerBox<EventX>]]=[:];
+class EventDispatcherX: NSObject,IEventDispatcherX {
+    private var eventsMap:[String:[ListenerItem<EventX>]]=[:];
     
     func ons(_ events:String..., handle: Selector, _ selfObj: AnyObject?) {
         events.forEach{
@@ -36,7 +36,7 @@ class EventDispatcher: NSObject,IEventDispatcher {
             eventsMap[type]=[];
         }
         
-        let item=ListenerBox<EventX>();
+        let item=ListenerItem<EventX>();
         item.handle=handle;
         item.selfObj=selfObj;
         eventsMap[type]!.append(item);

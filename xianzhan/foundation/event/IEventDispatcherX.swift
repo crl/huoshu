@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IEventDispatcher {
+protocol IEventDispatcherX {
     
     @discardableResult
     func on(_ type:String,_ handle:Selector,_ selfObj:AnyObject?) -> Bool;
