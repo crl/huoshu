@@ -55,7 +55,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         let time=Date.timeIntervalSinceReferenceDate;
         let t=Int(time);
-        let loader=URLRequestLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
+        let loader=RFURLRequestLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
         loader.defaultEvent(#selector(configHandle),self);
         loader.load();
     }
@@ -63,15 +63,15 @@ class ViewController: BaseWebViewController,ISDKRouter {
         return true;
     }
     
-    @objc func configHandle(e:EventX) {
+    @objc func configHandle(e:RFEvent) {
         
-        if e.type != EventX.COMPLETE
+        if e.type != RFEvent.COMPLETE
         {
             self.enterToGame();
             return;
         }
         
-        let key="web.root\(AppUtils.GetAppVersion())";
+        let key="web.root\(RFAppUtils.GetAppVersion())";
         
         let xml=e.data as! Data;
         let dic=XMLUtils.SimpleParse(xml: xml);
@@ -111,14 +111,14 @@ class ViewController: BaseWebViewController,ISDKRouter {
         loadWeb(rootURL,querys);
     }
     
-    @objc override func doInit(e:EventX) {
+    @objc override func doInit(e:RFEvent) {
         //test;
         super.doInit(e: e);
         self.present(LoginViewController(), animated: true){
         }
     }
     
-    @objc override func doPay(e:EventX) {
+    @objc override func doPay(e:RFEvent) {
         let dic=e.data as! [String:Any];
         
         let productRawId=dic.getString("key");
@@ -128,7 +128,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         
         let replaceKey="com.mmgame.xianzhan";
-        let withKey=AppUtils.GetBundleIdentifier();
+        let withKey=RFAppUtils.GetBundleIdentifier();
         
         let productId=productRawId.replacingOccurrences(of: replaceKey, with: withKey);
         print("\(productId)=\(productRawId)");
@@ -148,7 +148,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
     }
     
     
-    @objc func doLoad(e:EventX){
+    @objc func doLoad(e:RFEvent){
         loadWeb(e.data as! String);
     }
     
@@ -185,7 +185,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
                 }
             }else{
                 let d="loginInfo:\(d)";
-                AppUtils.Alert(d);
+                RFAppUtils.Alert(d);
             }
         }
         

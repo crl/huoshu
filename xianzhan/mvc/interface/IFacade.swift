@@ -14,7 +14,7 @@ enum InjectEventType:String{
     case Proxy="p"
 }
 
-protocol IFacade : IEventDispatcherX{
+protocol IFacade : IRFEventDispatcher{
     func registerProxy(_ proxy:Proxy) -> Bool;
     func registerMediator(_ mediator:Mediator) -> Bool;
     
@@ -24,7 +24,7 @@ protocol IFacade : IEventDispatcherX{
     func getProxy<T:Proxy>(_ type:T.Type) -> T;
     func getMediator<T:Mediator>(_ type:T.Type) -> T;
     
-    func registerEventInsterester(_ target:IEventInterester,_ type:InjectEventType,_ isBind:Bool,_ dispatcher:IEventDispatcherX?);
+    func registerEventInsterester(_ target:IEventInterester,_ type:InjectEventType,_ isBind:Bool,_ dispatcher:IRFEventDispatcher?);
 }
 
 protocol IMediator:IMVCHost{
@@ -38,7 +38,7 @@ protocol IProxy:IMVCHost {
     
 }
 
-protocol IPanel:IAsync,IEventDispatcherX {
+protocol IPanel:IAsync,IRFEventDispatcher {
     var isShow:Bool{get};
 }
 
@@ -59,7 +59,7 @@ protocol IAsync {
     func addReadyHandle(handle:Selector,selfObj:AnyObject);
 }
 
-protocol IMVCHost:IAsync,IEventDispatcherX,IEventInterester {
+protocol IMVCHost:IAsync,IRFEventDispatcher,IEventInterester {
     var name:String{
         get
     }
@@ -74,9 +74,9 @@ class InjectEventTypeHandle:NSObject {
     var events:[String]! = nil;
 }
 
-class MVCHost:EventDispatcherX,IMVCHost {
+class MVCHost:RFEventDispatcher,IMVCHost {
     var facade:IFacade;
-    private var readyHandles:[ListenerItem<EventX>]?=nil;
+    private var readyHandles:[RFListenerItem<RFEvent>]?=nil;
     
     var __eventInteresting: [String : [InjectEventTypeHandle]]?
     var eventInteresting:[String:[InjectEventTypeHandle]]?{
@@ -123,7 +123,7 @@ class MVCHost:EventDispatcherX,IMVCHost {
     
     func addReadyHandle(handle: Selector, selfObj: AnyObject) {
         if(_isReady){
-            _=selfObj.perform(handle, with: EventX.ReadyEvent);
+            _=selfObj.perform(handle, with: RFEvent.ReadyEvent);
             return;
         }
         if readyHandles == nil{
@@ -137,7 +137,7 @@ class MVCHost:EventDispatcherX,IMVCHost {
                 return;
             }
         }
-        let e=ListenerItem<EventX>();
+        let e=RFListenerItem<RFEvent>();
         e.handle=handle;
         e.selfObj=selfObj;
         readyHandles!.append(e);
@@ -153,12 +153,12 @@ class MVCHost:EventDispatcherX,IMVCHost {
         facade.registerEventInsterester(self,InjectEventType.Always,true,nil);
         if readyHandles != nil{
             readyHandles?.forEach{
-                _=$0.call(EventX.ReadyEvent);
+                _=$0.call(RFEvent.ReadyEvent);
             }
             readyHandles!.removeAll();
             readyHandles=nil;
         }
-        simpleDispatch(EventX.READY);
+        simpleDispatch(RFEvent.READY);
     }
     
     

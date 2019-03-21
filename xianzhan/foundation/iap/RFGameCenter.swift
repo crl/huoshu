@@ -9,14 +9,14 @@
 import UIKit
 import GameKit;
 
-class GameCenter:EventDispatcherX,GKGameCenterControllerDelegate {
+class RFGameCenter:RFEventDispatcher,GKGameCenterControllerDelegate {
     var gameCenterEnabled:Bool=false;
     
     var playerID:String?;
     
     private var localPlayer: GKLocalPlayer! = nil;
     
-    static let Instance=GameCenter();
+    static let Instance=RFGameCenter();
     
     func login() {
         
@@ -34,7 +34,7 @@ class GameCenter:EventDispatcherX,GKGameCenterControllerDelegate {
     
     func authenticateHandler(vc:UIViewController?, error:Error?){
         if(vc != nil) {
-            AppUtils.Present(vc!, animated: true, completion: nil)
+            RFAppUtils.Present(vc!, animated: true, completion: nil)
             return;
         }
         
@@ -84,7 +84,7 @@ class GameCenter:EventDispatcherX,GKGameCenterControllerDelegate {
             id=playerID!.replacingOccurrences(of: ":", with: "");
         }
         
-        self.simpleDispatch(EventX.CHANGE, id);
+        self.simpleDispatch(RFEvent.CHANGE, id);
     }
     
 }

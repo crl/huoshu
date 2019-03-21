@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventX: NSObject {
+class RFEvent: NSObject {
     
     static let COMPLETE="complete";
     static let FAILED="failed";
@@ -49,7 +49,7 @@ class EventX: NSObject {
     static let SHOW="show";
     static let HIDE="hide";
     
-    static let ReadyEvent:EventX=EventX(EventX.READY,nil);
+    static let ReadyEvent:RFEvent=RFEvent(RFEvent.READY,nil);
     
     private var _type:String!;
     
@@ -59,8 +59,8 @@ class EventX: NSObject {
         }
     }
     
-    private var _target:IEventDispatcherX!=nil;
-    var target:IEventDispatcherX{
+    private var _target:IRFEventDispatcher!=nil;
+    var target:IRFEventDispatcher{
         get{
             return _target;
         }
@@ -82,7 +82,7 @@ class EventX: NSObject {
         self.data = data;
     }
     
-    func setTarget(_ value:IEventDispatcherX) {
+    func setTarget(_ value:IRFEventDispatcher) {
         self._target=value;
     }
     
@@ -95,18 +95,18 @@ class EventX: NSObject {
         __stopsPropagation=true;
     }
     
-    static var Pool:[EventX]=[];
+    static var Pool:[RFEvent]=[];
     static var MAX=200;
-    static func FromPool(_ type:String,_ data:Any?=nil)->EventX{
+    static func FromPool(_ type:String,_ data:Any?=nil)->RFEvent{
         if Pool.count>0{
             let e = Pool.popLast()!;
             e.reset(type,data);
             return e;
         }
-        return EventX(type, data);
+        return RFEvent(type, data);
     }
     
-    static func ToPool(_ e:EventX){
+    static func ToPool(_ e:RFEvent){
         if(Pool.count<MAX){
             Pool.append(e);
         }

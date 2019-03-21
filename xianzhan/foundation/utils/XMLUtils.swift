@@ -13,7 +13,7 @@ class XMLUtils: NSObject {
     static func SimpleParse(xml:Data) -> [String:XMLItemVO] {
         let parser=XMLParser(data: xml);
         
-        let cc=SXMLParser();
+        let cc=RFSXMLParser();
         
         parser.delegate=cc;
         
@@ -45,7 +45,7 @@ class XMLItemVO:NSObject{
 }
 
 
-class SXMLParser:NSObject,XMLParserDelegate{
+class RFSXMLParser:NSObject,XMLParserDelegate{
     
     var data:[String:XMLItemVO];
     

@@ -24,7 +24,7 @@ class Mediator: MVCHost,IMediator {
     
     func setView(value: IPanel) {
         if let old=view{
-            old.off(EventX.READY, #selector(preViewReadyHandle), self);
+            old.off(RFEvent.READY, #selector(preViewReadyHandle), self);
             bindViewEvent(old,false);
         }
         view=value;
@@ -33,7 +33,7 @@ class Mediator: MVCHost,IMediator {
             return;
         }
         if !view.isReady{
-            view.on(EventX.READY, #selector(preViewReadyHandle), self);
+            view.on(RFEvent.READY, #selector(preViewReadyHandle), self);
             return;
         }
         //bindViewEvent(old,false);
@@ -54,14 +54,14 @@ class Mediator: MVCHost,IMediator {
     
     func bindViewEvent(_ view:IPanel,_ isBind:Bool=true) {
         if(isBind){
-            view.ons(EventX.SHOW,EventX.HIDE, handle: #selector(stageHandle), self);
+            view.ons(RFEvent.SHOW,RFEvent.HIDE, handle: #selector(stageHandle), self);
         }else{
-            view.offs(EventX.SHOW,EventX.HIDE, handle: #selector(stageHandle), self);
+            view.offs(RFEvent.SHOW,RFEvent.HIDE, handle: #selector(stageHandle), self);
         }
     }
     
-    @objc func stageHandle(e:EventX) {
-        if e.type == EventX.SHOW{
+    @objc func stageHandle(e:RFEvent) {
+        if e.type == RFEvent.SHOW{
             facade.registerEventInsterester(self, InjectEventType.Show, true, nil);
             if proxy != nil {
                 facade.registerEventInsterester(proxy, InjectEventType.Show, true, nil);
@@ -83,10 +83,10 @@ class Mediator: MVCHost,IMediator {
     
     
     //view;
-    @objc func preViewReadyHandle(_ e:EventX?=nil) {
+    @objc func preViewReadyHandle(_ e:RFEvent?=nil) {
         if let e=e{
             let v=e.target;
-            v.off(EventX.READY, #selector(preViewReadyHandle), self);
+            v.off(RFEvent.READY, #selector(preViewReadyHandle), self);
         }
         onViewReadyHandle();
         if proxy == nil{
@@ -94,7 +94,7 @@ class Mediator: MVCHost,IMediator {
             return;
         }
         if !proxy.isReady{
-            proxy.on(EventX.READY, #selector(preProxyReadyHandle), self);
+            proxy.on(RFEvent.READY, #selector(preProxyReadyHandle), self);
             proxy.startSync();
             return;
         }
@@ -107,10 +107,10 @@ class Mediator: MVCHost,IMediator {
     
     
     //proxy;
-    @objc func preProxyReadyHandle(_ e:EventX?){
+    @objc func preProxyReadyHandle(_ e:RFEvent?){
         if let e=e{
             let v=e.target;
-            v.off(EventX.READY, #selector(preViewReadyHandle), self);
+            v.off(RFEvent.READY, #selector(preViewReadyHandle), self);
         }
         onProxyReadyHandle();
         preMediatorReadyHandle();
@@ -123,11 +123,11 @@ class Mediator: MVCHost,IMediator {
         onMediatorReadyHandle();
         dispatchReadyHandle();
         
-        facade.simpleDispatch(EventX.MEDIATOR_READY, name);
+        facade.simpleDispatch(RFEvent.MEDIATOR_READY, name);
         
         bindViewEvent(view);
         if view.isShow{
-            stageHandle(e: EventX.FromPool(EventX.SHOW));
+            stageHandle(e: RFEvent.FromPool(RFEvent.SHOW));
         }
     }
     
@@ -139,12 +139,12 @@ class Mediator: MVCHost,IMediator {
         onAwaken();
         onUpdateView();
         
-        facade.simpleDispatch(EventX.MEDIATOR_SHOW, name);
+        facade.simpleDispatch(RFEvent.MEDIATOR_SHOW, name);
     }
     func preSleep() {
         onSleep();
         
-        facade.simpleDispatch(EventX.MEDIATOR_HIDE, name);
+        facade.simpleDispatch(RFEvent.MEDIATOR_HIDE, name);
     }
     
     func onAwaken() {

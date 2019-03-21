@@ -14,7 +14,7 @@ typealias Func<R> = ()->R
 typealias FuncT<T,R> = (T)->R;
 
 
-class ListenerItem<T> {
+class RFListenerItem<T> {
     var handle:Selector!;
     var selfObj:AnyObject?;
     
@@ -26,7 +26,7 @@ class ListenerItem<T> {
         _=selfObj?.perform(handle, with: e);
     }
 }
-class ListenerItemRef<T>:ListenerItem<T>{
+class RFListenerItemRef<T>:RFListenerItem<T>{
     var data:T!;
 }
 

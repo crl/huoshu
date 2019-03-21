@@ -8,8 +8,8 @@
 
 import UIKit
 
-class EventDispatcherX: NSObject,IEventDispatcherX {
-    private var eventsMap:[String:[ListenerItem<EventX>]]=[:];
+class RFEventDispatcher: NSObject,IRFEventDispatcher {
+    private var eventsMap:[String:[RFListenerItem<RFEvent>]]=[:];
     
     func ons(_ events:String..., handle: Selector, _ selfObj: AnyObject?) {
         events.forEach{
@@ -36,7 +36,7 @@ class EventDispatcherX: NSObject,IEventDispatcherX {
             eventsMap[type]=[];
         }
         
-        let item=ListenerItem<EventX>();
+        let item=RFListenerItem<RFEvent>();
         item.handle=handle;
         item.selfObj=selfObj;
         eventsMap[type]!.append(item);
@@ -69,7 +69,7 @@ class EventDispatcherX: NSObject,IEventDispatcherX {
     }
     
     @discardableResult
-    func dispatchEvent(_ e: EventX) -> Bool {
+    func dispatchEvent(_ e: RFEvent) -> Bool {
         
         let list=eventsMap[e.type];
         
@@ -98,10 +98,10 @@ class EventDispatcherX: NSObject,IEventDispatcherX {
             return false;
         }
         
-        let e=EventX.FromPool(type,data);
+        let e=RFEvent.FromPool(type,data);
         let b=dispatchEvent(e);
         
-        EventX.ToPool(e);
+        RFEvent.ToPool(e);
         
         return b;
     }

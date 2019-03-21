@@ -21,16 +21,16 @@ protocol ISDKRouter {
     func receipt(_ c:String,_ d:Any)->Void;
 }
 
-class JSSDK: EventDispatcherX {
+class RFJSSDK: RFEventDispatcher {
     
     private var webView:WKWebView!;
     
     var router:ISDKRouter?;
     
-    static var ins:JSSDK?=nil;
-    static func Get()->JSSDK{
+    static var ins:RFJSSDK?=nil;
+    static func Get()->RFJSSDK{
         if(ins==nil){
-            ins=JSSDK();
+            ins=RFJSSDK();
         }
         return ins!;
     }
@@ -49,7 +49,7 @@ class JSSDK: EventDispatcherX {
         t["c"]=c;
         t["d"]=d;
         
-        let command=JSONUtils.Encode(t);
+        let command=RFJSONUtils.Encode(t);
         
         let cmd="PlatformSDK.Receive('\(command)')";
         

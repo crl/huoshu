@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JSONUtils {    
+class RFJSONUtils {    
     static func Encode(_ data:Any) -> String {
         
         do {

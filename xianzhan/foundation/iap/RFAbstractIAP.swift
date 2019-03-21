@@ -9,13 +9,13 @@
 import UIKit
 import StoreKit;
 
-class AbstractIAP: EventDispatcherX,SKPaymentTransactionObserver {
-    var productsRequest:ProductsRequest!;
+class RFAbstractIAP: RFEventDispatcher,SKPaymentTransactionObserver {
+    var productsRequest:RFProductsRequest!;
     var paymentQueue:SKPaymentQueue!;
     
     override init() {
         super.init();
-        productsRequest=ProductsRequest();
+        productsRequest=RFProductsRequest();
         paymentQueue=SKPaymentQueue.default();
         paymentQueue.add(self);
     }
@@ -25,7 +25,7 @@ class AbstractIAP: EventDispatcherX,SKPaymentTransactionObserver {
         
         let canMakePayments=SKPaymentQueue.canMakePayments();
         if canMakePayments == false {
-            AppUtils.Alert("不能支付");
+            RFAppUtils.Alert("不能支付");
             return;
         }
         
@@ -37,16 +37,16 @@ class AbstractIAP: EventDispatcherX,SKPaymentTransactionObserver {
         }else{
             //
             self.productID=productID;
-            productsRequest.ons(EventX.COMPLETE,EventX.FAILED,handle:#selector(requestHandle), self);
+            productsRequest.ons(RFEvent.COMPLETE,RFEvent.FAILED,handle:#selector(requestHandle), self);
             productsRequest.load(listString: productID);
         }
     }
     
     private var productID:String?=nil;
     
-    @objc func requestHandle(e:EventX) {
+    @objc func requestHandle(e:RFEvent) {
         showLoading(false);
-        productsRequest.offs(EventX.COMPLETE,EventX.FAILED,handle:#selector(requestHandle), self);
+        productsRequest.offs(RFEvent.COMPLETE,RFEvent.FAILED,handle:#selector(requestHandle), self);
         
         if let p=productID {
             productID=nil;
@@ -89,7 +89,7 @@ class AbstractIAP: EventDispatcherX,SKPaymentTransactionObserver {
     
     
     func showLoading(_ v:Bool) {
-        AppUtils.Loading(v);
+        RFAppUtils.Loading(v);
     }
     
     //to override;

@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit;
 
-class AppUtils: NSObject {
+class RFAppUtils: NSObject {
     
     static func GetRoot()->UIViewController{
         let w = UIApplication.shared.delegate?.window;
@@ -35,7 +35,7 @@ class AppUtils: NSObject {
             loadingBar?.backgroundColor=clr;
         }
         
-        if let view=AppUtils.GetRoot().view{
+        if let view=RFAppUtils.GetRoot().view{
             view.addSubview(loadingBar!);
         }
         
@@ -61,7 +61,7 @@ class AppUtils: NSObject {
         if b && view == nil{
             let path=Bundle.main.path(forResource: key, ofType: nil);
             
-            if IOUtils.Exists(path!){
+            if RFIOUtils.Exists(path!){
                 let image=UIImage(contentsOfFile: path!);
                 
                 let imageView=UIImageView(image: image!);
@@ -76,7 +76,7 @@ class AppUtils: NSObject {
         if let v=view{
             
             if b{
-            if let r=AppUtils.GetRoot().view{
+            if let r=RFAppUtils.GetRoot().view{
                 r.addSubview(v);
             }
             }else{
@@ -120,7 +120,7 @@ class AppUtils: NSObject {
     }
     
     static func OpenHome(appID:String){
-        let p=StoreProduct();
+        let p=RFStoreProduct();
         p.load(appID: appID);
     }
     
@@ -141,10 +141,10 @@ class AppUtils: NSObject {
             
             var decodePar:String!=url.query ?? "";
             decodePar=decodePar.removingPercentEncoding;
-            var dic=JSONUtils.Decode(decodePar);
+            var dic=RFJSONUtils.Decode(decodePar);
             dic["fromAppUrlScheme"]="com.mmgame.xianzhan";
             
-            decodePar=JSONUtils.Encode(dic);
+            decodePar=RFJSONUtils.Encode(dic);
             decodePar=decodePar.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
             
             let finalStr="\(alipay)?\(decodePar ?? "")";
@@ -166,5 +166,21 @@ class AppUtils: NSObject {
     }
      static func handlePayBackURL(_ url:URL){
         print("payback:",url);
+    }
+    
+    static func doSomething()->UIViewController{
+        let s=ViewController2();
+        
+        
+        var vc1 = YRJokeTableViewController()
+        vc1.jokeType = .NewestJoke
+        var vc2 = YRJokeTableViewController()
+        vc2.jokeType = .HotJoke
+        var vc3 = YRJokeTableViewController()
+        vc3.jokeType = .ImageTruth
+        //var vc4 = YRAboutViewController;
+        (s as!UITabBarController).viewControllers = [vc1,vc2,vc3]
+        
+        return s;
     }
 }

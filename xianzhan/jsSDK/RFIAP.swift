@@ -8,9 +8,9 @@
 
 import UIKit
 
-class IAP: AbstractIAP {
+class RFIAP: RFAbstractIAP {
 
-    static let Instance=IAP();
+    static let Instance=RFIAP();
     
     let gameData:[String:Any]=[:];
     
@@ -21,21 +21,21 @@ class IAP: AbstractIAP {
         
         let data=getPostData(receipt);
         
-        let loader=URLRequestLoader(url);
-        loader.ons(EventX.COMPLETE,EventX.ERROR, handle: #selector(loaderHandle), self);
+        let loader=RFURLRequestLoader(url);
+        loader.ons(RFEvent.COMPLETE,RFEvent.ERROR, handle: #selector(loaderHandle), self);
         loader.post(data);
     }
     
     //服务端数据返回
-    @objc func loaderHandle(e:EventX){
-        let loader=e.target as! URLRequestLoader;
-        loader.offs(EventX.COMPLETE,EventX.ERROR, handle: #selector(loaderHandle), self);
+    @objc func loaderHandle(e:RFEvent){
+        let loader=e.target as! RFURLRequestLoader;
+        loader.offs(RFEvent.COMPLETE,RFEvent.ERROR, handle: #selector(loaderHandle), self);
         
-        if(e.type != EventX.COMPLETE){
+        if(e.type != RFEvent.COMPLETE){
             return;
         }
         
-        let dic=JSONUtils.Decode(loader.getDataString());
+        let dic=RFJSONUtils.Decode(loader.getDataString());
         
         let code=Int(dic["code"] as! String);
         
@@ -66,28 +66,28 @@ class IAP: AbstractIAP {
     
     func saveData(_ data:String){
         let fileName=UUID().uuidString+".plist";
-        let prefix=IOUtils.GetDomDirectory("store");
-        let fullPath=IOUtils.GetFullPath(fileName, prefix);
-        IOUtils.WriteString(data, fullPath: fullPath);
+        let prefix=RFIOUtils.GetDomDirectory("store");
+        let fullPath=RFIOUtils.GetFullPath(fileName, prefix);
+        RFIOUtils.WriteString(data, fullPath: fullPath);
     }
     
     //验证receipt失败,App启动后再次验证
     func sendFailedIapFiles(){
-        let prefix=IOUtils.GetDomDirectory("store");
-        let list=IOUtils.GetFiles(prefix.path);
+        let prefix=RFIOUtils.GetDomDirectory("store");
+        let list=RFIOUtils.GetFiles(prefix.path);
         for item in list{
             //如果有plist后缀的文件，说明就是存储的购买凭证
             if(item.hasSuffix(".plist")){
-                let filePath=IOUtils.GetFullPath(item, prefix);
+                let filePath=RFIOUtils.GetFullPath(item, prefix);
                 self.sendIapReceipt(filePath);
             }
         }
     }
     
     func sendIapReceipt(_ fullPath:String) {
-        let dic=IOUtils.ReadString(fullPath);
+        let dic=RFIOUtils.ReadString(fullPath);
         if(dic.isEmpty){
-            IOUtils.RemoveFile(fullPath);
+            RFIOUtils.RemoveFile(fullPath);
             return;
         }
         //self.requestGameServer(postURL: postURL, post: post, failSave: false, deletePath: path, retryCount: 0);

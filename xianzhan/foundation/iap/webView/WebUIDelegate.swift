@@ -9,15 +9,15 @@
 import UIKit
 import WebKit
 
-class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
+class WebUIDelegate: RFEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
     
     private var webView:WKWebView!;
     let view:UIViewController;
-    let sdk:JSSDK;
+    let sdk:RFJSSDK;
     
     public init(view:UIViewController) {
         self.view=view;
-        self.sdk=JSSDK.Get();
+        self.sdk=RFJSSDK.Get();
     }
     
     public func bind(_ webView:WKWebView){
@@ -31,7 +31,7 @@ class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavi
         
         let path=Bundle.main.path(forResource: "inject", ofType: "js");
         if let t=path {
-            let jsCode=IOUtils.ReadString(t);
+            let jsCode=RFIOUtils.ReadString(t);
             
             if !jsCode.isEmpty{
                 let script=WKUserScript(source: jsCode, injectionTime: .atDocumentEnd, forMainFrameOnly: true);
@@ -44,11 +44,11 @@ class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavi
     //WKNavigationDelegate
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         //Utils.ShowImage("bg.png");
-        AppUtils.Loading(true);
+        RFAppUtils.Loading(true);
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         //Utils.ShowImage("bg.png",false);
-        AppUtils.Loading(false);
+        RFAppUtils.Loading(false);
     }
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void){
         
@@ -57,7 +57,7 @@ class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavi
             return;
         }
         
-        let url=AppUtils.handlePayURL(tempUrl);
+        let url=RFAppUtils.handlePayURL(tempUrl);
         if let url=url {
             decisionHandler(.cancel);
             print("pay:",url);
@@ -113,7 +113,7 @@ class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavi
         }
         
         //Utils.ShowImage("bg.png",false);
-        AppUtils.Loading(false);
+        RFAppUtils.Loading(false);
         webView.addSubview(imageView);
         
         print("WKWebView",error);
@@ -127,7 +127,7 @@ class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavi
             i.removeFromSuperview();
         }
         
-        simpleDispatch(EventX.RELOAD);
+        simpleDispatch(RFEvent.RELOAD);
     }
     
     
@@ -135,7 +135,7 @@ class WebUIDelegate: EventDispatcherX,WKUIDelegate,WKScriptMessageHandler,WKNavi
     //WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
         let command:String=message.body as! String;
-        let cmd=JSONUtils.Decode(command);
+        let cmd=RFJSONUtils.Decode(command);
         if cmd.count == 0 {
             return;
         }

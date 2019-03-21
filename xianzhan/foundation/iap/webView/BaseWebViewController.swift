@@ -11,7 +11,7 @@ import WebKit;
 
 class BaseWebViewController: UIViewController {
     var webView:WKWebView!;
-    var sdk:JSSDK!;
+    var sdk:RFJSSDK!;
     override func viewDidLoad() {
         super.viewDidLoad()
         // 创建配置
@@ -26,10 +26,10 @@ class BaseWebViewController: UIViewController {
         webView.backgroundColor=UIColor.black;
         
         let uiDelegate=WebUIDelegate(view: self);
-        uiDelegate.on(EventX.RELOAD, #selector(doReload), self);
+        uiDelegate.on(RFEvent.RELOAD, #selector(doReload), self);
         uiDelegate.bind(webView);
         
-        sdk=JSSDK.Get();
+        sdk=RFJSSDK.Get();
         sdk.initWebView(webView);
         
         sdk.on(CMD.Init,#selector(doInit),self);
@@ -41,18 +41,18 @@ class BaseWebViewController: UIViewController {
         view.addSubview(webView);
     }
     
-    @objc func doInit(e:EventX){
+    @objc func doInit(e:RFEvent){
         sdk.send(e.type,rootQuerys);
     }
-    @objc func doLogin(e:EventX){
+    @objc func doLogin(e:RFEvent){
         
     }
-    @objc func doPay(e:EventX){
+    @objc func doPay(e:RFEvent){
         
     }
     
     
-    @objc func doReload(e:EventX) {
+    @objc func doReload(e:RFEvent) {
         // 设置访问的URL
         load(uri: rootURI,querys: rootQuerys);
     }

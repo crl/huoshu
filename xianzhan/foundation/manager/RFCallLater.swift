@@ -8,16 +8,16 @@
 
 import UIKit
 
-class CallLater: NSObject,ITickable {
+class RFCallLater: NSObject,ITickable {
     
-    static let Instance:CallLater=CallLater();
+    static let Instance:RFCallLater=RFCallLater();
     
     func tick(now: DispatchTime) {
         
     }
     
 
-    static var list:[ListenerItemRef<DispatchTime>]=[];
+    static var list:[RFListenerItemRef<DispatchTime>]=[];
     
     static func AddItem(_ handle:Selector,selfObj:AnyObject,_ delay:DispatchTimeInterval) -> Bool{
         
@@ -29,13 +29,13 @@ class CallLater: NSObject,ITickable {
             return true;
         }
         
-        let item=ListenerItemRef<DispatchTime>();
+        let item=RFListenerItemRef<DispatchTime>();
         item.handle=handle;
         item.selfObj=selfObj;
         item.data=t;
         
         if(list.count==1){
-            TickManager.AddItem(Instance);
+            RFTickManager.AddItem(Instance);
         }
         
         return true;
@@ -49,7 +49,7 @@ class CallLater: NSObject,ITickable {
             list.remove(at: index);
             
             if(list.count==0){
-                TickManager.RemoveItem(Instance);
+                RFTickManager.RemoveItem(Instance);
             }
             
             return true;
