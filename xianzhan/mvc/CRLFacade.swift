@@ -8,39 +8,39 @@
 
 import UIKit
 
-class Facade: CRLEventDispatcher,IFacade {
+class CRLFacade: CRLEventDispatcher,ICRLFacade {
     
     private var mvcInjectLock:[String:IMVCHost];
-    private var mediators:View<Mediator>;
-    private var proxys:View<Proxy>;
+    private var mediators:View<CRLMediator>;
+    private var proxys:View<CRLProxy>;
     
     private override init(){
-        mediators = View<Mediator>();
-        proxys = View<Proxy>();
+        mediators = View<CRLMediator>();
+        proxys = View<CRLProxy>();
         mvcInjectLock=[:];
         super.init();
     }
     
-    private static var ins:IFacade!;
-    public static func Get()->IFacade{
-        ins = ins ?? Facade();
+    private static var ins:ICRLFacade!;
+    public static func Get()->ICRLFacade{
+        ins = ins ?? CRLFacade();
         return ins;
     }
     
-    func registerProxy(_ proxy: Proxy) ->Bool{
+    func registerProxy(_ proxy: CRLProxy) ->Bool{
         return proxys.register(proxy);
     }
     
-    func registerMediator(_ mediator: Mediator)->Bool {
+    func registerMediator(_ mediator: CRLMediator)->Bool {
         return mediators.register(mediator);
     }
     
-    func getProxy(_ name:String) -> Proxy{
+    func getProxy(_ name:String) -> CRLProxy{
         let host = proxys.get(name);
         if host == nil {
-            let cls:AnyClass? = Singleton.GetClass(name);
+            let cls:AnyClass? = CRLSingleton.GetClass(name);
             if let c=cls {
-                let proxy=(c as! Proxy.Type).init(name,self) ;
+                let proxy=(c as! CRLProxy.Type).init(name,self) ;
                 unSafeInjectInstance(proxy,name);
                 _=registerProxy(proxy);
                 return proxy;
@@ -48,12 +48,12 @@ class Facade: CRLEventDispatcher,IFacade {
         }
         return host!;
     }
-    func getMediator(_ name:String) -> Mediator{
+    func getMediator(_ name:String) -> CRLMediator{
         let host=mediators.get(name);
         if(host == nil){
-            let cls:AnyClass?=Singleton.GetClass(name);
+            let cls:AnyClass?=CRLSingleton.GetClass(name);
             if let c=cls {
-                let mediator = (c as! Mediator.Type).init(name,self);
+                let mediator = (c as! CRLMediator.Type).init(name,self);
                 unSafeInjectInstance(mediator,name);
                 _=registerMediator(mediator);
                 return mediator;
@@ -62,14 +62,14 @@ class Facade: CRLEventDispatcher,IFacade {
         return host!;
     }
     
-    func getProxy<T:Proxy>(_ type:T.Type) -> T{
+    func getProxy<T:CRLProxy>(_ type:T.Type) -> T{
         let fullClassName=type.self.ClassName;
-        let name=Singleton.GetAliasName(fullClassName);
+        let name=CRLSingleton.GetAliasName(fullClassName);
         return getProxy(name) as! T;
     }
-    func getMediator<T:Mediator>(_ type:T.Type) -> T{
+    func getMediator<T:CRLMediator>(_ type:T.Type) -> T{
         let fullClassName=type.self.ClassName;
-        let name=Singleton.GetAliasName(fullClassName);
+        let name=CRLSingleton.GetAliasName(fullClassName);
         return getMediator(name) as! T;
     }
     
@@ -81,13 +81,13 @@ class Facade: CRLEventDispatcher,IFacade {
     }
     
     
-    func registerEventInsterester(_ target: IEventInterester, _ type: InjectEventType, _ isBind: Bool,_ dispatcher:IEventDispatcher?=nil) {
+    func registerEventInsterester(_ target: IEventInterester, _ type: InjectEventType, _ isBind: Bool,_ dispatcher:ICRLEventDispatcher?=nil) {
         
         let l=target.getEventInteresting(type);
         guard let t=l else {
             return;
         }
-        var dis:IEventDispatcher!=dispatcher;
+        var dis:ICRLEventDispatcher!=dispatcher;
         if dis == nil{
             dis=self;
         }
@@ -109,7 +109,7 @@ class Facade: CRLEventDispatcher,IFacade {
     }
     
     
-    static func GetMediator<T:Mediator>(_ type:T.Type)->T{
+    static func GetMediator<T:CRLMediator>(_ type:T.Type)->T{
         return Get().getMediator(type);
     }
     

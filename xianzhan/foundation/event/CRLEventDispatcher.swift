@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CRLEventDispatcher: NSObject,IEventDispatcher {
-    private var eventsMap:[String:[RFListenerItem<Event>]]=[:];
+class CRLEventDispatcher: NSObject,ICRLEventDispatcher {
+    private var eventsMap:[String:[RFListenerItem<CRLEvent>]]=[:];
     
     func ons(_ events:String..., handle: Selector, _ selfObj: AnyObject?) {
         events.forEach{
@@ -36,7 +36,7 @@ class CRLEventDispatcher: NSObject,IEventDispatcher {
             eventsMap[type]=[];
         }
         
-        let item=RFListenerItem<Event>();
+        let item=RFListenerItem<CRLEvent>();
         item.handle=handle;
         item.selfObj=selfObj;
         eventsMap[type]!.append(item);
@@ -69,7 +69,7 @@ class CRLEventDispatcher: NSObject,IEventDispatcher {
     }
     
     @discardableResult
-    func dispatchEvent(_ e: Event) -> Bool {
+    func dispatchEvent(_ e: CRLEvent) -> Bool {
         
         let list=eventsMap[e.type];
         
@@ -98,10 +98,10 @@ class CRLEventDispatcher: NSObject,IEventDispatcher {
             return false;
         }
         
-        let e=Event.FromPool(type,data);
+        let e=CRLEvent.FromPool(type,data);
         let b=dispatchEvent(e);
         
-        Event.ToPool(e);
+        CRLEvent.ToPool(e);
         
         return b;
     }

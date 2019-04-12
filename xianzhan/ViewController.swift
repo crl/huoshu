@@ -55,7 +55,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         let time=Date.timeIntervalSinceReferenceDate;
         let t=Int(time);
-        let loader=URLRequestLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
+        let loader=CRLURLLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
         loader.defaultEvent(#selector(configHandle),self);
         loader.load();
     }
@@ -63,9 +63,9 @@ class ViewController: BaseWebViewController,ISDKRouter {
         return true;
     }
     
-    @objc func configHandle(e:Event) {
+    @objc func configHandle(e:CRLEvent) {
         
-        if e.type != Event.COMPLETE
+        if e.type != CRLEvent.COMPLETE
         {
             self.enterToGame();
             return;
@@ -74,7 +74,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         let key="web.root\(AppUtils.GetAppVersion())";
         
         let xml=e.data as! Data;
-        let dic=XMLUtils.SimpleParse(xml: xml);
+        let dic=CRLXMLUtils.SimpleParse(xml: xml);
         
         let url:String?=dic[key]?.value;
         
@@ -111,14 +111,14 @@ class ViewController: BaseWebViewController,ISDKRouter {
         loadWeb(rootURL,querys);
     }
     
-    @objc override func doInit(e:Event) {
+    @objc override func doInit(e:CRLEvent) {
         //test;
         super.doInit(e: e);
         self.present(SDKLoginAty(), animated: true){
         }
     }
     
-    @objc override func doPay(e:Event) {
+    @objc override func doPay(e:CRLEvent) {
         let dic=e.data as! [String:Any];
         
         let productRawId=dic.getString("key");
@@ -148,7 +148,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
     }
     
     
-    @objc func doLoad(e:Event){
+    @objc func doLoad(e:CRLEvent){
         loadWeb(e.data as! String);
     }
     

@@ -10,7 +10,7 @@ import UIKit
 import StoreKit;
 
 
-class ProductsRequest:CRLEventDispatcher,SKProductsRequestDelegate {
+class CRLProductsRequest:CRLEventDispatcher,SKProductsRequestDelegate {
     var dic:[String:SKProduct]=[:];
     
     func load(listString:String) {
@@ -35,7 +35,7 @@ class ProductsRequest:CRLEventDispatcher,SKProductsRequestDelegate {
         for product in response.invalidProductIdentifiers {
             print("invalidProduct:"+product);
         }
-        self.simpleDispatch(Event.COMPLETE, dic);
+        self.simpleDispatch(CRLEvent.COMPLETE, dic);
     }
     
     

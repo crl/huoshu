@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit;
 
-class StoreProduct: NSObject,SKStoreProductViewControllerDelegate {
+class CRLStoreProduct: NSObject,SKStoreProductViewControllerDelegate {
     var storeView:SKStoreProductViewController;
     override init() {
         storeView=SKStoreProductViewController();

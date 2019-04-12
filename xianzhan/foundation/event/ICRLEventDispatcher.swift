@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IEventDispatcher {
+protocol ICRLEventDispatcher {
     
     @discardableResult
     func on(_ type:String,_ handle:Selector,_ selfObj:AnyObject?) -> Bool;
@@ -20,7 +20,7 @@ protocol IEventDispatcher {
     func hasOn(_ type:String)->Bool;
     
     @discardableResult
-    func dispatchEvent(_ e:Event) -> Bool;
+    func dispatchEvent(_ e:CRLEvent) -> Bool;
     
     @discardableResult
     func simpleDispatch(_ type:String,_ data:Any?) -> Bool;

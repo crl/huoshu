@@ -8,6 +8,6 @@
 
 import UIKit
 
-class Proxy: MVCHost,IProxy {
+class CRLProxy: MVCHost,ICRLProxy {
    
 }

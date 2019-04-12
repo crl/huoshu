@@ -120,7 +120,7 @@ class AppUtils: NSObject {
     }
     
     static func OpenHome(appID:String){
-        let p=StoreProduct();
+        let p=CRLStoreProduct();
         p.load(appID: appID);
     }
     
@@ -141,10 +141,10 @@ class AppUtils: NSObject {
             
             var decodePar:String!=url.query ?? "";
             decodePar=decodePar.removingPercentEncoding;
-            var dic=RFJSONUtils.Decode(decodePar);
+            var dic=CRLJSONUtils.Decode(decodePar);
             dic["fromAppUrlScheme"]="com.mmgame.xianzhan";
             
-            decodePar=RFJSONUtils.Encode(dic);
+            decodePar=CRLJSONUtils.Encode(dic);
             decodePar=decodePar.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
             
             let finalStr="\(alipay)?\(decodePar ?? "")";

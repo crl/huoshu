@@ -21,21 +21,21 @@ class IAP: AbstractIAP {
         
         let data=getPostData(receipt);
         
-        let loader=URLRequestLoader(url);
-        loader.ons(Event.COMPLETE,Event.ERROR, handle: #selector(loaderHandle), self);
+        let loader=CRLURLLoader(url);
+        loader.ons(CRLEvent.COMPLETE,CRLEvent.ERROR, handle: #selector(loaderHandle), self);
         loader.post(data);
     }
     
     //服务端数据返回
-    @objc func loaderHandle(e:Event){
-        let loader=e.target as! URLRequestLoader;
-        loader.offs(Event.COMPLETE,Event.ERROR, handle: #selector(loaderHandle), self);
+    @objc func loaderHandle(e:CRLEvent){
+        let loader=e.target as! CRLURLLoader;
+        loader.offs(CRLEvent.COMPLETE,CRLEvent.ERROR, handle: #selector(loaderHandle), self);
         
-        if(e.type != Event.COMPLETE){
+        if(e.type != CRLEvent.COMPLETE){
             return;
         }
         
-        let dic=RFJSONUtils.Decode(loader.getDataString());
+        let dic=CRLJSONUtils.Decode(loader.getDataString());
         
         let code=Int(dic["code"] as! String);
         

@@ -127,7 +127,7 @@ class WebUIDelegate: CRLEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNa
             i.removeFromSuperview();
         }
         
-        simpleDispatch(Event.RELOAD);
+        simpleDispatch(CRLEvent.RELOAD);
     }
     
     
@@ -135,7 +135,7 @@ class WebUIDelegate: CRLEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNa
     //WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
         let command:String=message.body as! String;
-        let cmd=RFJSONUtils.Decode(command);
+        let cmd=CRLJSONUtils.Decode(command);
         if cmd.count == 0 {
             return;
         }

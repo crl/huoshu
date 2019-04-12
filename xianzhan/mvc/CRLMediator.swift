@@ -8,10 +8,10 @@
 
 import UIKit
 
-class Mediator: MVCHost,IMediator {
+class CRLMediator: MVCHost,ICRLMediator {
     
-    var view:IPanel! = nil;
-    var proxy:IProxy! = nil;
+    var view:ICRLPanel! = nil;
+    var proxy:ICRLProxy! = nil;
     
     override func load() {
         if view == nil{
@@ -22,9 +22,9 @@ class Mediator: MVCHost,IMediator {
         }
     }
     
-    func setView(value: IPanel) {
+    func setView(value: ICRLPanel) {
         if let old=view{
-            old.off(Event.READY, #selector(preViewReadyHandle), self);
+            old.off(CRLEvent.READY, #selector(preViewReadyHandle), self);
             bindViewEvent(old,false);
         }
         view=value;
@@ -33,35 +33,35 @@ class Mediator: MVCHost,IMediator {
             return;
         }
         if !view.isReady{
-            view.on(Event.READY, #selector(preViewReadyHandle), self);
+            view.on(CRLEvent.READY, #selector(preViewReadyHandle), self);
             return;
         }
         //bindViewEvent(old,false);
         preViewReadyHandle();
     }
     
-    func getView() -> IPanel {
+    func getView() -> ICRLPanel {
         return self.view;
     }
     
-    func setProxy(value: IProxy) {
+    func setProxy(value: ICRLProxy) {
         self.proxy=value;
     }
     
-    func getProxy() -> IProxy {
+    func getProxy() -> ICRLProxy {
         return self.proxy;
     }
     
-    func bindViewEvent(_ view:IPanel,_ isBind:Bool=true) {
+    func bindViewEvent(_ view:ICRLPanel,_ isBind:Bool=true) {
         if(isBind){
-            view.ons(Event.SHOW,Event.HIDE, handle: #selector(stageHandle), self);
+            view.ons(CRLEvent.SHOW,CRLEvent.HIDE, handle: #selector(stageHandle), self);
         }else{
-            view.offs(Event.SHOW,Event.HIDE, handle: #selector(stageHandle), self);
+            view.offs(CRLEvent.SHOW,CRLEvent.HIDE, handle: #selector(stageHandle), self);
         }
     }
     
-    @objc func stageHandle(e:Event) {
-        if e.type == Event.SHOW{
+    @objc func stageHandle(e:CRLEvent) {
+        if e.type == CRLEvent.SHOW{
             facade.registerEventInsterester(self, InjectEventType.Show, true, nil);
             if proxy != nil {
                 facade.registerEventInsterester(proxy, InjectEventType.Show, true, nil);
@@ -83,10 +83,10 @@ class Mediator: MVCHost,IMediator {
     
     
     //view;
-    @objc func preViewReadyHandle(_ e:Event?=nil) {
+    @objc func preViewReadyHandle(_ e:CRLEvent?=nil) {
         if let e=e{
             let v=e.target;
-            v.off(Event.READY, #selector(preViewReadyHandle), self);
+            v.off(CRLEvent.READY, #selector(preViewReadyHandle), self);
         }
         onViewReadyHandle();
         if proxy == nil{
@@ -94,7 +94,7 @@ class Mediator: MVCHost,IMediator {
             return;
         }
         if !proxy.isReady{
-            proxy.on(Event.READY, #selector(preProxyReadyHandle), self);
+            proxy.on(CRLEvent.READY, #selector(preProxyReadyHandle), self);
             proxy.startSync();
             return;
         }
@@ -107,10 +107,10 @@ class Mediator: MVCHost,IMediator {
     
     
     //proxy;
-    @objc func preProxyReadyHandle(_ e:Event?){
+    @objc func preProxyReadyHandle(_ e:CRLEvent?){
         if let e=e{
             let v=e.target;
-            v.off(Event.READY, #selector(preViewReadyHandle), self);
+            v.off(CRLEvent.READY, #selector(preViewReadyHandle), self);
         }
         onProxyReadyHandle();
         preMediatorReadyHandle();
@@ -123,11 +123,11 @@ class Mediator: MVCHost,IMediator {
         onMediatorReadyHandle();
         dispatchReadyHandle();
         
-        facade.simpleDispatch(Event.MEDIATOR_READY, name);
+        facade.simpleDispatch(CRLEvent.MEDIATOR_READY, name);
         
         bindViewEvent(view);
         if view.isShow{
-            stageHandle(e: Event.FromPool(Event.SHOW));
+            stageHandle(e: CRLEvent.FromPool(CRLEvent.SHOW));
         }
     }
     
@@ -139,12 +139,12 @@ class Mediator: MVCHost,IMediator {
         onAwaken();
         onUpdateView();
         
-        facade.simpleDispatch(Event.MEDIATOR_SHOW, name);
+        facade.simpleDispatch(CRLEvent.MEDIATOR_SHOW, name);
     }
     func preSleep() {
         onSleep();
         
-        facade.simpleDispatch(Event.MEDIATOR_HIDE, name);
+        facade.simpleDispatch(CRLEvent.MEDIATOR_HIDE, name);
     }
     
     func onAwaken() {

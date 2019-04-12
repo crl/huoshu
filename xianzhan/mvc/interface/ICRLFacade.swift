@@ -14,31 +14,31 @@ enum InjectEventType:String{
     case Proxy="p"
 }
 
-protocol IFacade : IEventDispatcher{
-    func registerProxy(_ proxy:Proxy) -> Bool;
-    func registerMediator(_ mediator:Mediator) -> Bool;
+protocol ICRLFacade : ICRLEventDispatcher{
+    func registerProxy(_ proxy:CRLProxy) -> Bool;
+    func registerMediator(_ mediator:CRLMediator) -> Bool;
     
-    func getProxy(_ name:String) -> Proxy;
-    func getMediator(_ name:String) -> Mediator;
+    func getProxy(_ name:String) -> CRLProxy;
+    func getMediator(_ name:String) -> CRLMediator;
     
-    func getProxy<T:Proxy>(_ type:T.Type) -> T;
-    func getMediator<T:Mediator>(_ type:T.Type) -> T;
+    func getProxy<T:CRLProxy>(_ type:T.Type) -> T;
+    func getMediator<T:CRLMediator>(_ type:T.Type) -> T;
     
-    func registerEventInsterester(_ target:IEventInterester,_ type:InjectEventType,_ isBind:Bool,_ dispatcher:IEventDispatcher?);
+    func registerEventInsterester(_ target:IEventInterester,_ type:InjectEventType,_ isBind:Bool,_ dispatcher:ICRLEventDispatcher?);
 }
 
-protocol IMediator:IMVCHost{
-    func setView(value:IPanel);
-    func getView() -> IPanel;
+protocol ICRLMediator:IMVCHost{
+    func setView(value:ICRLPanel);
+    func getView() -> ICRLPanel;
     
-    func setProxy(value:IProxy)
-    func getProxy() -> IProxy;
+    func setProxy(value:ICRLProxy)
+    func getProxy() -> ICRLProxy;
 }
-protocol IProxy:IMVCHost {
+protocol ICRLProxy:IMVCHost {
     
 }
 
-protocol IPanel:IAsync,IEventDispatcher {
+protocol ICRLPanel:ICRLAsync,ICRLEventDispatcher {
     var isShow:Bool{get};
 }
 
@@ -49,7 +49,7 @@ protocol IEventInterester {
     func getEventInteresting(_ type:InjectEventType)->[InjectEventTypeHandle]?;
 }
 
-protocol IAsync {
+protocol ICRLAsync {
     var isReady:Bool{
         get
     }
@@ -59,7 +59,7 @@ protocol IAsync {
     func addReadyHandle(handle:Selector,selfObj:AnyObject);
 }
 
-protocol IMVCHost:IAsync,IEventDispatcher,IEventInterester {
+protocol IMVCHost:ICRLAsync,ICRLEventDispatcher,IEventInterester {
     var name:String{
         get
     }
@@ -75,8 +75,8 @@ class InjectEventTypeHandle:NSObject {
 }
 
 class MVCHost:CRLEventDispatcher,IMVCHost {
-    var facade:IFacade;
-    private var readyHandles:[RFListenerItem<Event>]?=nil;
+    var facade:ICRLFacade;
+    private var readyHandles:[RFListenerItem<CRLEvent>]?=nil;
     
     var __eventInteresting: [String : [InjectEventTypeHandle]]?
     var eventInteresting:[String:[InjectEventTypeHandle]]?{
@@ -86,7 +86,7 @@ class MVCHost:CRLEventDispatcher,IMVCHost {
     }
     
     private var __name:String="";
-    required init(_ name:String,_ facade:IFacade) {
+    required init(_ name:String,_ facade:ICRLFacade) {
         __name=name;
         self.facade=facade;
         
@@ -123,7 +123,7 @@ class MVCHost:CRLEventDispatcher,IMVCHost {
     
     func addReadyHandle(handle: Selector, selfObj: AnyObject) {
         if(_isReady){
-            _=selfObj.perform(handle, with: Event.ReadyEvent);
+            _=selfObj.perform(handle, with: CRLEvent.ReadyEvent);
             return;
         }
         if readyHandles == nil{
@@ -137,7 +137,7 @@ class MVCHost:CRLEventDispatcher,IMVCHost {
                 return;
             }
         }
-        let e=RFListenerItem<Event>();
+        let e=RFListenerItem<CRLEvent>();
         e.handle=handle;
         e.selfObj=selfObj;
         readyHandles!.append(e);
@@ -153,12 +153,12 @@ class MVCHost:CRLEventDispatcher,IMVCHost {
         facade.registerEventInsterester(self,InjectEventType.Always,true,nil);
         if readyHandles != nil{
             readyHandles?.forEach{
-                _=$0.call(Event.ReadyEvent);
+                _=$0.call(CRLEvent.ReadyEvent);
             }
             readyHandles!.removeAll();
             readyHandles=nil;
         }
-        simpleDispatch(Event.READY);
+        simpleDispatch(CRLEvent.READY);
     }
     
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Event: NSObject {
+class CRLEvent: NSObject {
     
     static let COMPLETE="complete";
     static let FAILED="failed";
@@ -49,7 +49,7 @@ class Event: NSObject {
     static let SHOW="show";
     static let HIDE="hide";
     
-    static let ReadyEvent:Event=Event(Event.READY,nil);
+    static let ReadyEvent:CRLEvent=CRLEvent(CRLEvent.READY,nil);
     
     private var _type:String!;
     
@@ -59,8 +59,8 @@ class Event: NSObject {
         }
     }
     
-    private var _target:IEventDispatcher!=nil;
-    var target:IEventDispatcher{
+    private var _target:ICRLEventDispatcher!=nil;
+    var target:ICRLEventDispatcher{
         get{
             return _target;
         }
@@ -82,7 +82,7 @@ class Event: NSObject {
         self.data = data;
     }
     
-    func setTarget(_ value:IEventDispatcher) {
+    func setTarget(_ value:ICRLEventDispatcher) {
         self._target=value;
     }
     
@@ -95,18 +95,18 @@ class Event: NSObject {
         __stopsPropagation=true;
     }
     
-    static var Pool:[Event]=[];
+    static var Pool:[CRLEvent]=[];
     static var MAX=200;
-    static func FromPool(_ type:String,_ data:Any?=nil)->Event{
+    static func FromPool(_ type:String,_ data:Any?=nil)->CRLEvent{
         if Pool.count>0{
             let e = Pool.popLast()!;
             e.reset(type,data);
             return e;
         }
-        return Event(type, data);
+        return CRLEvent(type, data);
     }
     
-    static func ToPool(_ e:Event){
+    static func ToPool(_ e:CRLEvent){
         if(Pool.count<MAX){
             Pool.append(e);
         }

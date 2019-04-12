@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URLRequestLoader: CRLEventDispatcher,URLSessionDelegate {
+class CRLURLLoader: CRLEventDispatcher,URLSessionDelegate {
     let url:String!;
     var request:URLRequest!;
     
@@ -20,11 +20,11 @@ class URLRequestLoader: CRLEventDispatcher,URLSessionDelegate {
     
     func defaultEvent(_ handle: Selector, _ selfObj: AnyObject?,isBind:Bool=true){
         if isBind{
-            self.on(Event.COMPLETE, handle,selfObj);
-            self.on(Event.ERROR, handle,selfObj);
+            self.on(CRLEvent.COMPLETE, handle,selfObj);
+            self.on(CRLEvent.ERROR, handle,selfObj);
         }else{
-            self.off(Event.COMPLETE, handle,selfObj);
-            self.off(Event.ERROR, handle,selfObj);
+            self.off(CRLEvent.COMPLETE, handle,selfObj);
+            self.off(CRLEvent.ERROR, handle,selfObj);
         }
     }
     
@@ -62,16 +62,16 @@ class URLRequestLoader: CRLEventDispatcher,URLSessionDelegate {
         let task=session.dataTask(with: request) { (data, response, error) in
             if(error != nil){
                 self.data=Data(base64Encoded: error.debugDescription);
-                self.simpleDispatch(Event.ERROR, error.debugDescription);
+                self.simpleDispatch(CRLEvent.ERROR, error.debugDescription);
                 return;
             }
             
             self.data=data;
             
-            self.simpleDispatch(Event.COMPLETE, self.data);
+            self.simpleDispatch(CRLEvent.COMPLETE, self.data);
         }
         
-        self.simpleDispatch(Event.START);
+        self.simpleDispatch(CRLEvent.START);
         task.resume();
     }
     

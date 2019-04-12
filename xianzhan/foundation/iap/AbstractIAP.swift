@@ -10,12 +10,12 @@ import UIKit
 import StoreKit;
 
 class AbstractIAP: CRLEventDispatcher,SKPaymentTransactionObserver {
-    var productsRequest:ProductsRequest!;
+    var productsRequest:CRLProductsRequest!;
     var paymentQueue:SKPaymentQueue!;
     
     override init() {
         super.init();
-        productsRequest=ProductsRequest();
+        productsRequest=CRLProductsRequest();
         paymentQueue=SKPaymentQueue.default();
         paymentQueue.add(self);
     }
@@ -37,16 +37,16 @@ class AbstractIAP: CRLEventDispatcher,SKPaymentTransactionObserver {
         }else{
             //
             self.productID=productID;
-            productsRequest.ons(Event.COMPLETE,Event.FAILED,handle:#selector(requestHandle), self);
+            productsRequest.ons(CRLEvent.COMPLETE,CRLEvent.FAILED,handle:#selector(requestHandle), self);
             productsRequest.load(listString: productID);
         }
     }
     
     private var productID:String?=nil;
     
-    @objc func requestHandle(e:Event) {
+    @objc func requestHandle(e:CRLEvent) {
         showLoading(false);
-        productsRequest.offs(Event.COMPLETE,Event.FAILED,handle:#selector(requestHandle), self);
+        productsRequest.offs(CRLEvent.COMPLETE,CRLEvent.FAILED,handle:#selector(requestHandle), self);
         
         if let p=productID {
             productID=nil;

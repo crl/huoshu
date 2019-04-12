@@ -49,7 +49,7 @@ class RFJSSDK: CRLEventDispatcher {
         t["c"]=c;
         t["d"]=d;
         
-        let command=RFJSONUtils.Encode(t);
+        let command=CRLJSONUtils.Encode(t);
         
         let cmd="PlatformSDK.Receive('\(command)')";
         

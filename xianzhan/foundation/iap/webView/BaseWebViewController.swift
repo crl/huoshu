@@ -26,7 +26,7 @@ class BaseWebViewController: UIViewController {
         webView.backgroundColor=UIColor.black;
         
         let uiDelegate=WebUIDelegate(view: self);
-        uiDelegate.on(Event.RELOAD, #selector(doReload), self);
+        uiDelegate.on(CRLEvent.RELOAD, #selector(doReload), self);
         uiDelegate.bind(webView);
         
         sdk=RFJSSDK.Get();
@@ -41,18 +41,18 @@ class BaseWebViewController: UIViewController {
         view.addSubview(webView);
     }
     
-    @objc func doInit(e:Event){
+    @objc func doInit(e:CRLEvent){
         sdk.send(e.type,rootQuerys);
     }
-    @objc func doLogin(e:Event){
+    @objc func doLogin(e:CRLEvent){
         
     }
-    @objc func doPay(e:Event){
+    @objc func doPay(e:CRLEvent){
         
     }
     
     
-    @objc func doReload(e:Event) {
+    @objc func doReload(e:CRLEvent) {
         // 设置访问的URL
         load(uri: rootURI,querys: rootQuerys);
     }

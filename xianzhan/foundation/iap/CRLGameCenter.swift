@@ -9,14 +9,14 @@
 import UIKit
 import GameKit;
 
-class GameCenter:CRLEventDispatcher,GKGameCenterControllerDelegate {
+class CRLGameCenter:CRLEventDispatcher,GKGameCenterControllerDelegate {
     var gameCenterEnabled:Bool=false;
     
     var playerID:String?;
     
     private var localPlayer: GKLocalPlayer! = nil;
     
-    static let Instance=GameCenter();
+    static let Instance=CRLGameCenter();
     
     func login() {
         
@@ -84,7 +84,7 @@ class GameCenter:CRLEventDispatcher,GKGameCenterControllerDelegate {
             id=playerID!.replacingOccurrences(of: ":", with: "");
         }
         
-        self.simpleDispatch(Event.CHANGE, id);
+        self.simpleDispatch(CRLEvent.CHANGE, id);
     }
     
 }

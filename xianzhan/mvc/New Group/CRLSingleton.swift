@@ -7,7 +7,7 @@
 //
 import UIKit;
 
-class Singleton {
+class CRLSingleton {
     
     private static var classMap:[String:AnyClass]=[:];
     private static var aliasMap:[String:String]=[:];

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestMediator: Mediator {
+class TestMediator: CRLMediator {
 
     func hello(_ name:String) {
         print("hello "+name);

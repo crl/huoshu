@@ -8,12 +8,12 @@
 
 import UIKit
 
-class XMLUtils: NSObject {
+class CRLXMLUtils: NSObject {
     
     static func SimpleParse(xml:Data) -> [String:XMLItemVO] {
         let parser=XMLParser(data: xml);
         
-        let cc=SXMLParser();
+        let cc=CRLSXMLParser();
         
         parser.delegate=cc;
         
@@ -45,7 +45,7 @@ class XMLItemVO:NSObject{
 }
 
 
-class SXMLParser:NSObject,XMLParserDelegate{
+class CRLSXMLParser:NSObject,XMLParserDelegate{
     
     var data:[String:XMLItemVO];
     

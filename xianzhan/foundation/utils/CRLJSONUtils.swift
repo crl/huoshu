@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RFJSONUtils {    
+class CRLJSONUtils {    
     static func Encode(_ data:Any) -> String {
         
         do {
