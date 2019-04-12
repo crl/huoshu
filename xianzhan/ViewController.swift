@@ -38,7 +38,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         let appid="5bf5042956fec80d6268c787";
         let appkey="280389b0f74f608f354bb595eb2a6d18";
         
-        print("sdk ver:",GameSDKVersionNumber);
+        //print("sdk ver:",GameSDKVersionNumber);
         
         
         GameSDKFacade.sdkInit(withGameId: appid, withGameKey: appkey, withGameVersion: "1.0.1", withIsNeedLogin: true, with: self)

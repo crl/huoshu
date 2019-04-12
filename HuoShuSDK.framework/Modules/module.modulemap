@@ -1,6 +1,0 @@
-framework module HuoShuSDK {
-  umbrella header "HuoShuSDK.h"
-
-  export *
-  module * { export * }
-}

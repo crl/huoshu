@@ -35,7 +35,7 @@ class CallLater: NSObject,ITickable {
         item.data=t;
         
         if(list.count==1){
-            RFTickManager.AddItem(Instance);
+            TickManager.AddItem(Instance);
         }
         
         return true;
@@ -49,7 +49,7 @@ class CallLater: NSObject,ITickable {
             list.remove(at: index);
             
             if(list.count==0){
-                RFTickManager.RemoveItem(Instance);
+                TickManager.RemoveItem(Instance);
             }
             
             return true;

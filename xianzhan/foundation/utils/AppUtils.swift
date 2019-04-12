@@ -168,19 +168,4 @@ class AppUtils: NSObject {
         print("payback:",url);
     }
     
-    static func doSomething()->UIViewController{
-        let s=ViewController2();
-        
-        
-        var vc1 = YRJokeTableViewController()
-        vc1.jokeType = .NewestJoke
-        var vc2 = YRJokeTableViewController()
-        vc2.jokeType = .HotJoke
-        var vc3 = YRJokeTableViewController()
-        vc3.jokeType = .ImageTruth
-        //var vc4 = YRAboutViewController;
-        (s as!UITabBarController).viewControllers = [vc1,vc2,vc3]
-        
-        return s;
-    }
 }

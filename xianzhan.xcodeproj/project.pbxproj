@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C196849226054C800B25C5E /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C196847226054C700B25C5E /* Resources.bundle */; };
+		0C19684B2260557D00B25C5E /* ViewController22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C19684A2260557D00B25C5E /* ViewController22.swift */; };
+		0C196850226056DC00B25C5E /* ChannelSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19684E226056DC00B25C5E /* ChannelSDK.framework */; };
+		0C196851226056DC00B25C5E /* Res.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C19684F226056DC00B25C5E /* Res.bundle */; };
+		0C196854226057BA00B25C5E /* My.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C196853226057BA00B25C5E /* My.m */; };
+		0C19685622605A4F00B25C5E /* ChannelSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19684E226056DC00B25C5E /* ChannelSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C23332A21B795E7008AEFA3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C23332921B795E7008AEFA3 /* StoreKit.framework */; };
-		0C2DAC26226024AB00CB1610 /* Res.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DAC24226024AA00CB1610 /* Res.bundle */; };
-		0C2DAC27226024AB00CB1610 /* ChannelSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C2DAC25226024AA00CB1610 /* ChannelSDK.framework */; };
 		0C3826DF21A6CA0F00EA5834 /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 0C3826DE21A6CA0F00EA5834 /* inject.js */; };
 		0C4B20A021915A100062E44B /* Mediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B209F21915A100062E44B /* Mediator.swift */; };
 		0C4B20A221915A2C0062E44B /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20A121915A2C0062E44B /* Proxy.swift */; };
@@ -56,12 +60,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0C74E3D821AE46F30084CEA8 /* Embed Frameworks */ = {
+		0C2DAC5922603A2A00CB1610 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0C19685622605A4F00B25C5E /* ChannelSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,9 +74,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C196846226054C700B25C5E /* HuoShuSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HuoShuSDK.framework; sourceTree = "<group>"; };
+		0C196847226054C700B25C5E /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
+		0C19684A2260557D00B25C5E /* ViewController22.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController22.swift; sourceTree = "<group>"; };
+		0C19684E226056DC00B25C5E /* ChannelSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ChannelSDK.framework; sourceTree = "<group>"; };
+		0C19684F226056DC00B25C5E /* Res.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Res.bundle; sourceTree = "<group>"; };
+		0C196852226057BA00B25C5E /* My.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = My.h; sourceTree = "<group>"; };
+		0C196853226057BA00B25C5E /* My.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = My.m; sourceTree = "<group>"; };
 		0C23332921B795E7008AEFA3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		0C2DAC24226024AA00CB1610 /* Res.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Res.bundle; sourceTree = "<group>"; };
-		0C2DAC25226024AA00CB1610 /* ChannelSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ChannelSDK.framework; sourceTree = "<group>"; };
 		0C3826DE21A6CA0F00EA5834 /* inject.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
 		0C4B209F21915A100062E44B /* Mediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mediator.swift; sourceTree = "<group>"; };
 		0C4B20A121915A2C0062E44B /* Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
@@ -126,22 +136,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CE0AEF821B7DC240068BD6C /* libsqlite3.0.tbd in Frameworks */,
-				0C6250E821AB9B0C00E9998A /* CoreLocation.framework in Frameworks */,
 				0C6250F621AB9B5400E9998A /* SystemConfiguration.framework in Frameworks */,
+				0C196850226056DC00B25C5E /* ChannelSDK.framework in Frameworks */,
 				0C6250F421AB9B4B00E9998A /* Foundation.framework in Frameworks */,
+				0C6250E821AB9B0C00E9998A /* CoreLocation.framework in Frameworks */,
 				0C6250F221AB9B4400E9998A /* Security.framework in Frameworks */,
 				0C6250F021AB9B3B00E9998A /* CoreTelephony.framework in Frameworks */,
 				0C6250EE21AB9B3000E9998A /* CoreMotion.framework in Frameworks */,
 				0C6250EA21AB9B1700E9998A /* AdSupport.framework in Frameworks */,
 				0C23332A21B795E7008AEFA3 /* StoreKit.framework in Frameworks */,
-				0C2DAC27226024AB00CB1610 /* ChannelSDK.framework in Frameworks */,
+				0CE0AEF821B7DC240068BD6C /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C19684C226056A100B25C5E /* oldSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0C196846226054C700B25C5E /* HuoShuSDK.framework */,
+				0C196847226054C700B25C5E /* Resources.bundle */,
+			);
+			path = oldSDK;
+			sourceTree = "<group>";
+		};
+		0C19684D226056B300B25C5E /* newSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0C19684E226056DC00B25C5E /* ChannelSDK.framework */,
+				0C19684F226056DC00B25C5E /* Res.bundle */,
+			);
+			path = newSDK;
+			sourceTree = "<group>";
+		};
 		0C4B20A32191742C0062E44B /* jsSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,12 +329,14 @@
 		0CE201D321901024006C6FF0 = {
 			isa = PBXGroup;
 			children = (
+				0C196852226057BA00B25C5E /* My.h */,
+				0C196853226057BA00B25C5E /* My.m */,
+				0C19684D226056B300B25C5E /* newSDK */,
+				0C19684C226056A100B25C5E /* oldSDK */,
 				0CE201DE21901024006C6FF0 /* xianzhan */,
 				0CE201DD21901024006C6FF0 /* Products */,
 				0C6250E621AB9B0C00E9998A /* Frameworks */,
 				0C74E3D221AC2E980084CEA8 /* xianzhan-Bridging-Header.h */,
-				0C2DAC25226024AA00CB1610 /* ChannelSDK.framework */,
-				0C2DAC24226024AA00CB1610 /* Res.bundle */,
 			);
 			sourceTree = "<group>";
 		};
@@ -327,6 +357,7 @@
 				0CE1527521913B4600945FA5 /* mvc */,
 				0CE201DF21901024006C6FF0 /* AppDelegate.swift */,
 				0CE201E121901024006C6FF0 /* ViewController.swift */,
+				0C19684A2260557D00B25C5E /* ViewController22.swift */,
 				0CE201E321901024006C6FF0 /* Main.storyboard */,
 				0CE201E621901026006C6FF0 /* Assets.xcassets */,
 				0CE201E821901026006C6FF0 /* LaunchScreen.storyboard */,
@@ -345,7 +376,7 @@
 				0CE201D821901024006C6FF0 /* Sources */,
 				0CE201D921901024006C6FF0 /* Frameworks */,
 				0CE201DA21901024006C6FF0 /* Resources */,
-				0C74E3D821AE46F30084CEA8 /* Embed Frameworks */,
+				0C2DAC5922603A2A00CB1610 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -401,9 +432,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CE201EA21901026006C6FF0 /* LaunchScreen.storyboard in Resources */,
-				0C2DAC26226024AB00CB1610 /* Res.bundle in Resources */,
 				0CE201E721901026006C6FF0 /* Assets.xcassets in Resources */,
+				0C196849226054C800B25C5E /* Resources.bundle in Resources */,
 				0C6250E121A6DF9200E9998A /* bg.png in Resources */,
+				0C196851226056DC00B25C5E /* Res.bundle in Resources */,
 				0C5EF43A21A523CB00FDD405 /* 404.jpg in Resources */,
 				0C3826DF21A6CA0F00EA5834 /* inject.js in Resources */,
 				0CE201E521901024006C6FF0 /* Main.storyboard in Resources */,
@@ -417,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C19684B2260557D00B25C5E /* ViewController22.swift in Sources */,
 				0C4B20A221915A2C0062E44B /* Proxy.swift in Sources */,
 				0CE1527821913FF500945FA5 /* IFacade.swift in Sources */,
 				0C4B20C32192EF4C0062E44B /* URLRequestLoader.swift in Sources */,
@@ -424,6 +457,7 @@
 				0CE201E221901024006C6FF0 /* ViewController.swift in Sources */,
 				0CE1527C219142BE00945FA5 /* View.swift in Sources */,
 				0C5EF43F21A52D5600FDD405 /* TickManager.swift in Sources */,
+				0C196854226057BA00B25C5E /* My.m in Sources */,
 				0C4B20D5219573020062E44B /* TestMediator.swift in Sources */,
 				0C4B20B62192CE8F0062E44B /* AbstractIAP.swift in Sources */,
 				0C4B20C9219305F80062E44B /* IEventDispatcher.swift in Sources */,
@@ -591,16 +625,22 @@
 		0CE201EF21901026006C6FF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					arm64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = UJSJRNNN58;
+				DEVELOPMENT_TEAM = L6658XF48Q;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/oldSDK",
+					"$(PROJECT_DIR)/newSDK",
 				);
 				INFOPLIST_FILE = xianzhan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -608,9 +648,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xzggame.qhxx;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xianzhan.xxzl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = xzggame_dev;
+				PROVISIONING_PROFILE_SPECIFIER = xianzhanDev;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "xianzhan-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -622,16 +666,22 @@
 		0CE201F021901026006C6FF0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					arm64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = UJSJRNNN58;
+				DEVELOPMENT_TEAM = L6658XF48Q;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/oldSDK",
+					"$(PROJECT_DIR)/newSDK",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				INFOPLIST_FILE = xianzhan/Info.plist;
@@ -640,9 +690,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xzggame.qhxx;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xianzhan.xxzl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = xzggame_dis;
+				PROVISIONING_PROFILE_SPECIFIER = xianzhanDis;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "xianzhan-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
