@@ -10,7 +10,7 @@ import UIKit
 import StoreKit;
 
 
-class RFProductsRequest:RFEventDispatcher,SKProductsRequestDelegate {
+class ProductsRequest:EventDispatcher,SKProductsRequestDelegate {
     var dic:[String:SKProduct]=[:];
     
     func load(listString:String) {
@@ -35,7 +35,7 @@ class RFProductsRequest:RFEventDispatcher,SKProductsRequestDelegate {
         for product in response.invalidProductIdentifiers {
             print("invalidProduct:"+product);
         }
-        self.simpleDispatch(RFEvent.COMPLETE, dic);
+        self.simpleDispatch(Event.COMPLETE, dic);
     }
     
     

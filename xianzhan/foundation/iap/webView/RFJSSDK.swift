@@ -21,7 +21,7 @@ protocol ISDKRouter {
     func receipt(_ c:String,_ d:Any)->Void;
 }
 
-class RFJSSDK: RFEventDispatcher {
+class RFJSSDK: EventDispatcher {
     
     private var webView:WKWebView!;
     

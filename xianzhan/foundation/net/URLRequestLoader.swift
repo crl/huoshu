@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RFURLRequestLoader: RFEventDispatcher,URLSessionDelegate {
+class URLRequestLoader: EventDispatcher,URLSessionDelegate {
     let url:String!;
     var request:URLRequest!;
     
@@ -20,11 +20,11 @@ class RFURLRequestLoader: RFEventDispatcher,URLSessionDelegate {
     
     func defaultEvent(_ handle: Selector, _ selfObj: AnyObject?,isBind:Bool=true){
         if isBind{
-            self.on(RFEvent.COMPLETE, handle,selfObj);
-            self.on(RFEvent.ERROR, handle,selfObj);
+            self.on(Event.COMPLETE, handle,selfObj);
+            self.on(Event.ERROR, handle,selfObj);
         }else{
-            self.off(RFEvent.COMPLETE, handle,selfObj);
-            self.off(RFEvent.ERROR, handle,selfObj);
+            self.off(Event.COMPLETE, handle,selfObj);
+            self.off(Event.ERROR, handle,selfObj);
         }
     }
     
@@ -62,16 +62,16 @@ class RFURLRequestLoader: RFEventDispatcher,URLSessionDelegate {
         let task=session.dataTask(with: request) { (data, response, error) in
             if(error != nil){
                 self.data=Data(base64Encoded: error.debugDescription);
-                self.simpleDispatch(RFEvent.ERROR, error.debugDescription);
+                self.simpleDispatch(Event.ERROR, error.debugDescription);
                 return;
             }
             
             self.data=data;
             
-            self.simpleDispatch(RFEvent.COMPLETE, self.data);
+            self.simpleDispatch(Event.COMPLETE, self.data);
         }
         
-        self.simpleDispatch(RFEvent.START);
+        self.simpleDispatch(Event.START);
         task.resume();
     }
     

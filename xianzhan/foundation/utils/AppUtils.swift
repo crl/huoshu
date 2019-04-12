@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit;
 
-class RFAppUtils: NSObject {
+class AppUtils: NSObject {
     
     static func GetRoot()->UIViewController{
         let w = UIApplication.shared.delegate?.window;
@@ -35,7 +35,7 @@ class RFAppUtils: NSObject {
             loadingBar?.backgroundColor=clr;
         }
         
-        if let view=RFAppUtils.GetRoot().view{
+        if let view=AppUtils.GetRoot().view{
             view.addSubview(loadingBar!);
         }
         
@@ -61,7 +61,7 @@ class RFAppUtils: NSObject {
         if b && view == nil{
             let path=Bundle.main.path(forResource: key, ofType: nil);
             
-            if RFIOUtils.Exists(path!){
+            if IOUtils.Exists(path!){
                 let image=UIImage(contentsOfFile: path!);
                 
                 let imageView=UIImageView(image: image!);
@@ -76,7 +76,7 @@ class RFAppUtils: NSObject {
         if let v=view{
             
             if b{
-            if let r=RFAppUtils.GetRoot().view{
+            if let r=AppUtils.GetRoot().view{
                 r.addSubview(v);
             }
             }else{
@@ -120,7 +120,7 @@ class RFAppUtils: NSObject {
     }
     
     static func OpenHome(appID:String){
-        let p=RFStoreProduct();
+        let p=StoreProduct();
         p.load(appID: appID);
     }
     

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class RFCallLater: NSObject,ITickable {
+class CallLater: NSObject,ITickable {
     
-    static let Instance:RFCallLater=RFCallLater();
+    static let Instance:CallLater=CallLater();
     
     func tick(now: DispatchTime) {
         

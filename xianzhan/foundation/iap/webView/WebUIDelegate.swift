@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class WebUIDelegate: RFEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
+class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
     
     private var webView:WKWebView!;
     let view:UIViewController;
@@ -31,7 +31,7 @@ class WebUIDelegate: RFEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNav
         
         let path=Bundle.main.path(forResource: "inject", ofType: "js");
         if let t=path {
-            let jsCode=RFIOUtils.ReadString(t);
+            let jsCode=IOUtils.ReadString(t);
             
             if !jsCode.isEmpty{
                 let script=WKUserScript(source: jsCode, injectionTime: .atDocumentEnd, forMainFrameOnly: true);
@@ -44,11 +44,11 @@ class WebUIDelegate: RFEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNav
     //WKNavigationDelegate
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         //Utils.ShowImage("bg.png");
-        RFAppUtils.Loading(true);
+        AppUtils.Loading(true);
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         //Utils.ShowImage("bg.png",false);
-        RFAppUtils.Loading(false);
+        AppUtils.Loading(false);
     }
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void){
         
@@ -57,7 +57,7 @@ class WebUIDelegate: RFEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNav
             return;
         }
         
-        let url=RFAppUtils.handlePayURL(tempUrl);
+        let url=AppUtils.handlePayURL(tempUrl);
         if let url=url {
             decisionHandler(.cancel);
             print("pay:",url);
@@ -113,7 +113,7 @@ class WebUIDelegate: RFEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNav
         }
         
         //Utils.ShowImage("bg.png",false);
-        RFAppUtils.Loading(false);
+        AppUtils.Loading(false);
         webView.addSubview(imageView);
         
         print("WKWebView",error);
@@ -127,7 +127,7 @@ class WebUIDelegate: RFEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNav
             i.removeFromSuperview();
         }
         
-        simpleDispatch(RFEvent.RELOAD);
+        simpleDispatch(Event.RELOAD);
     }
     
     

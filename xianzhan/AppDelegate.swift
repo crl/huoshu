@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool{
-        RFAppUtils.handlePayBackURL(url);
+        AppUtils.handlePayBackURL(url);
         return true;
     }
 }

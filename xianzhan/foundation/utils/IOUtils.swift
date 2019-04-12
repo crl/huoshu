@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RFIOUtils: NSObject {
+class IOUtils: NSObject {
     
     static let fileManager=FileManager.default;
     

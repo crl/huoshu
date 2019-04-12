@@ -38,24 +38,24 @@ class ViewController: BaseWebViewController,ISDKRouter {
         let appid="5bf5042956fec80d6268c787";
         let appkey="280389b0f74f608f354bb595eb2a6d18";
         
-        print("sdk ver:",HuoShuSDKVersionNumber)
+        print("sdk ver:",GameSDKVersionNumber);
         
         
-        HuoShuSDKMgr.huoShuSDKInit(withApp_id: appid, withAppKey: appkey, withGameVer: "1.0.1", withIsRequireLogin: true,with: self);
+        GameSDKFacade.sdkInit(withGameId: appid, withGameKey: appkey, withGameVersion: "1.0.1", withIsNeedLogin: true, with: self)
         
         
         let notifi=NotificationCenter.default;
-        notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: NSNotification.Name.huoshuLogin, object: nil);
-        notifi.addObserver(self, selector: #selector(sdkPayHandle), name: NSNotification.Name.huoshuPayt, object: nil);
-        notifi.addObserver(self, selector: #selector(sdkEnterHandle), name: NSNotification.Name.enterGame, object: nil);
-        notifi.addObserver(self, selector: #selector(sdkRegisterHandle), name: NSNotification.Name.huoshuRegister, object: nil);
+        notifi.addObserver(self, selector: #selector(sdkLoginHandle), name: NSNotification.Name(rawValue: hsGameLoginNotify), object: nil);
+        notifi.addObserver(self, selector: #selector(sdkPayHandle), name: NSNotification.Name(rawValue: hsGamePaytNotify), object: nil);
+        notifi.addObserver(self, selector: #selector(sdkEnterHandle), name: NSNotification.Name(rawValue: hsGameEnterGameNotify), object: nil);
+        notifi.addObserver(self, selector: #selector(sdkRegisterHandle), name: NSNotification.Name(rawValue:hsGameRegisterNotify), object: nil);
         
         sdk.on("load", #selector(doLoad), self);
         sdk.router=self;
         
         let time=Date.timeIntervalSinceReferenceDate;
         let t=Int(time);
-        let loader=RFURLRequestLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
+        let loader=URLRequestLoader("https://xz-hf-dev.fire233.com/web.xml?t=\(t)");
         loader.defaultEvent(#selector(configHandle),self);
         loader.load();
     }
@@ -63,15 +63,15 @@ class ViewController: BaseWebViewController,ISDKRouter {
         return true;
     }
     
-    @objc func configHandle(e:RFEvent) {
+    @objc func configHandle(e:Event) {
         
-        if e.type != RFEvent.COMPLETE
+        if e.type != Event.COMPLETE
         {
             self.enterToGame();
             return;
         }
         
-        let key="web.root\(RFAppUtils.GetAppVersion())";
+        let key="web.root\(AppUtils.GetAppVersion())";
         
         let xml=e.data as! Data;
         let dic=XMLUtils.SimpleParse(xml: xml);
@@ -111,14 +111,14 @@ class ViewController: BaseWebViewController,ISDKRouter {
         loadWeb(rootURL,querys);
     }
     
-    @objc override func doInit(e:RFEvent) {
+    @objc override func doInit(e:Event) {
         //test;
         super.doInit(e: e);
-        self.present(LoginViewController(), animated: true){
+        self.present(SDKLoginAty(), animated: true){
         }
     }
     
-    @objc override func doPay(e:RFEvent) {
+    @objc override func doPay(e:Event) {
         let dic=e.data as! [String:Any];
         
         let productRawId=dic.getString("key");
@@ -128,7 +128,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         
         let replaceKey="com.mmgame.xianzhan";
-        let withKey=RFAppUtils.GetBundleIdentifier();
+        let withKey=AppUtils.GetBundleIdentifier();
         
         let productId=productRawId.replacingOccurrences(of: replaceKey, with: withKey);
         print("\(productId)=\(productRawId)");
@@ -143,12 +143,12 @@ class ViewController: BaseWebViewController,ISDKRouter {
         
         let order=dic.getString("game_payorder");
         
-        let m=HuoShuSDKMgr.getInstance();
-        m?.openPay(withServerid: server_id, withRoleId: role_id, withPayAmount: "1", withCallBack: order, withGoodId: productId, withMoney: money, with: self);
+        let m=GameSDKFacade.getInstance();
+        m?.pay(withServerId: server_id, withRoleId: role_id, withCallBack: order, withMoney: money, withGoodId: productId, withPayAmount: "1", with: self);
     }
     
     
-    @objc func doLoad(e:RFEvent){
+    @objc func doLoad(e:Event){
         loadWeb(e.data as! String);
     }
     
@@ -170,7 +170,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
     }
     
     func doSdkLogin(_ e:Notification,_ enter:Bool=false){
-        let dic=HuoShuSDKMgr.getLoginInfo();
+        let dic=GameSDKFacade.getLoginInfo();
         
         if let d=dic{
             let openid=d["openId"];
@@ -185,7 +185,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
                 }
             }else{
                 let d="loginInfo:\(d)";
-                RFAppUtils.Alert(d);
+                AppUtils.Alert(d);
             }
         }
         
@@ -213,10 +213,7 @@ class ViewController: BaseWebViewController,ISDKRouter {
                 return;
             }
             lastServer_id=server_id;
-            HuoShuSDKMgr.getInstance()?.loginRole(withServerId: server_id,
-                                                  withRoleId: role_id,
-                                                  withRoleName:nickname,
-                                                  withRoleLevel: "\(level)");
+            GameSDKFacade.getInstance()?.loginRole(withServerId: server_id, withRoleName: nickname, withRoleId: role_id, withRoleLevel: "\(level)");
             
         case "createRoleLog":
             let dic=d as! [String:Any];
@@ -224,10 +221,8 @@ class ViewController: BaseWebViewController,ISDKRouter {
             let role_id=dic.getString("role_id");
             let nickname=dic.getString("nickname");
             //let level=dic["level"] as? String;
+            GameSDKFacade.getInstance()?.createRole(withServerId: server_id, withRoleName: nickname, withRoleId: role_id);
             
-            HuoShuSDKMgr.getInstance()?.createRole(withServerId: server_id,
-                                                   withRoleId: role_id,
-                                                   withRoleName: nickname);
             
         case "levelUpLog":
             let dic=d as! [String:Any];
@@ -236,10 +231,8 @@ class ViewController: BaseWebViewController,ISDKRouter {
             let nickname=dic.getString("nickname");
             let level=dic.getString("level");
             
-            HuoShuSDKMgr.getInstance()?.upgradeRole(withServerId: server_id,
-                                                    withRoleId: role_id,
-                                                    withRoleName: nickname,
-                                                    withRoleLevel: level);
+            GameSDKFacade.getInstance()?.upgradeRole(withServerId: server_id, withRoleName: nickname, withRoleId: role_id, withRoleLevel: level)
+        
             
         case "pay":
             //路由一下

@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit;
 
-class RFStoreProduct: NSObject,SKStoreProductViewControllerDelegate {
+class StoreProduct: NSObject,SKStoreProductViewControllerDelegate {
     var storeView:SKStoreProductViewController;
     override init() {
         storeView=SKStoreProductViewController();
@@ -20,7 +20,7 @@ class RFStoreProduct: NSObject,SKStoreProductViewControllerDelegate {
     func load(appID:String){
         storeView.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier:appID]) { (result, error) in
             if(result){
-                RFAppUtils.Present(self.storeView, animated: true, completion: nil);
+                AppUtils.Present(self.storeView, animated: true, completion: nil);
             }else if(error != nil){
                 print("error: %@",error!);
             }
