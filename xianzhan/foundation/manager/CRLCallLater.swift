@@ -8,9 +8,9 @@
 
 import UIKit
 
-class CallLater: NSObject,ITickable {
+class CRLCallLater: NSObject,ITickable {
     
-    static let Instance:CallLater=CallLater();
+    static let Instance:CRLCallLater=CRLCallLater();
     
     func tick(now: DispatchTime) {
         
@@ -35,7 +35,7 @@ class CallLater: NSObject,ITickable {
         item.data=t;
         
         if(list.count==1){
-            TickManager.AddItem(Instance);
+            CRLTickManager.AddItem(Instance);
         }
         
         return true;
@@ -49,7 +49,7 @@ class CallLater: NSObject,ITickable {
             list.remove(at: index);
             
             if(list.count==0){
-                TickManager.RemoveItem(Instance);
+                CRLTickManager.RemoveItem(Instance);
             }
             
             return true;

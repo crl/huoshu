@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URLRequestLoader: EventDispatcher,URLSessionDelegate {
+class URLRequestLoader: CRLEventDispatcher,URLSessionDelegate {
     let url:String!;
     var request:URLRequest!;
     

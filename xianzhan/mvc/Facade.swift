@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Facade: EventDispatcher,IFacade {
+class Facade: CRLEventDispatcher,IFacade {
     
     private var mvcInjectLock:[String:IMVCHost];
     private var mediators:View<Mediator>;

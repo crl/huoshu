@@ -11,7 +11,6 @@
 		0C19684B2260557D00B25C5E /* ViewController22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C19684A2260557D00B25C5E /* ViewController22.swift */; };
 		0C196850226056DC00B25C5E /* ChannelSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19684E226056DC00B25C5E /* ChannelSDK.framework */; };
 		0C196851226056DC00B25C5E /* Res.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C19684F226056DC00B25C5E /* Res.bundle */; };
-		0C196854226057BA00B25C5E /* My.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C196853226057BA00B25C5E /* My.m */; };
 		0C19685622605A4F00B25C5E /* ChannelSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0C19684E226056DC00B25C5E /* ChannelSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C23332A21B795E7008AEFA3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C23332921B795E7008AEFA3 /* StoreKit.framework */; };
 		0C3826DF21A6CA0F00EA5834 /* inject.js in Resources */ = {isa = PBXBuildFile; fileRef = 0C3826DE21A6CA0F00EA5834 /* inject.js */; };
@@ -28,7 +27,7 @@
 		0C4B20BB2192E0770062E44B /* IOUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20BA2192E0770062E44B /* IOUtils.swift */; };
 		0C4B20BF2192E6FA0062E44B /* RFJSONUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20BE2192E6FA0062E44B /* RFJSONUtils.swift */; };
 		0C4B20C32192EF4C0062E44B /* URLRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20C22192EF4C0062E44B /* URLRequestLoader.swift */; };
-		0C4B20C62192F31F0062E44B /* EventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20C52192F31F0062E44B /* EventDispatcher.swift */; };
+		0C4B20C62192F31F0062E44B /* CRLEventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20C52192F31F0062E44B /* CRLEventDispatcher.swift */; };
 		0C4B20C9219305F80062E44B /* IEventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20C8219305F80062E44B /* IEventDispatcher.swift */; };
 		0C4B20CC21943F870062E44B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20CB21943F870062E44B /* Event.swift */; };
 		0C4B20CE21945D4A0062E44B /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20CD21945D4A0062E44B /* IAP.swift */; };
@@ -36,8 +35,8 @@
 		0C4B20D321956DAC0062E44B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20D221956DAC0062E44B /* Extension.swift */; };
 		0C4B20D5219573020062E44B /* TestMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4B20D4219573020062E44B /* TestMediator.swift */; };
 		0C5EF43A21A523CB00FDD405 /* 404.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C5EF43921A523CB00FDD405 /* 404.jpg */; };
-		0C5EF43D21A52CD800FDD405 /* CallLater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5EF43C21A52CD800FDD405 /* CallLater.swift */; };
-		0C5EF43F21A52D5600FDD405 /* TickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5EF43E21A52D5600FDD405 /* TickManager.swift */; };
+		0C5EF43D21A52CD800FDD405 /* CRLCallLater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5EF43C21A52CD800FDD405 /* CRLCallLater.swift */; };
+		0C5EF43F21A52D5600FDD405 /* CRLTickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5EF43E21A52D5600FDD405 /* CRLTickManager.swift */; };
 		0C6250E121A6DF9200E9998A /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C6250E021A6DF9200E9998A /* bg.png */; };
 		0C6250E821AB9B0C00E9998A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6250E721AB9B0C00E9998A /* CoreLocation.framework */; };
 		0C6250EA21AB9B1700E9998A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6250E921AB9B1700E9998A /* AdSupport.framework */; };
@@ -79,8 +78,6 @@
 		0C19684A2260557D00B25C5E /* ViewController22.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController22.swift; sourceTree = "<group>"; };
 		0C19684E226056DC00B25C5E /* ChannelSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ChannelSDK.framework; sourceTree = "<group>"; };
 		0C19684F226056DC00B25C5E /* Res.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Res.bundle; sourceTree = "<group>"; };
-		0C196852226057BA00B25C5E /* My.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = My.h; sourceTree = "<group>"; };
-		0C196853226057BA00B25C5E /* My.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = My.m; sourceTree = "<group>"; };
 		0C23332921B795E7008AEFA3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0C3826DE21A6CA0F00EA5834 /* inject.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = inject.js; sourceTree = "<group>"; };
 		0C4B209F21915A100062E44B /* Mediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mediator.swift; sourceTree = "<group>"; };
@@ -96,7 +93,7 @@
 		0C4B20BA2192E0770062E44B /* IOUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOUtils.swift; sourceTree = "<group>"; };
 		0C4B20BE2192E6FA0062E44B /* RFJSONUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFJSONUtils.swift; sourceTree = "<group>"; };
 		0C4B20C22192EF4C0062E44B /* URLRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestLoader.swift; sourceTree = "<group>"; };
-		0C4B20C52192F31F0062E44B /* EventDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDispatcher.swift; sourceTree = "<group>"; };
+		0C4B20C52192F31F0062E44B /* CRLEventDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRLEventDispatcher.swift; sourceTree = "<group>"; };
 		0C4B20C8219305F80062E44B /* IEventDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEventDispatcher.swift; sourceTree = "<group>"; };
 		0C4B20CB21943F870062E44B /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0C4B20CD21945D4A0062E44B /* IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
@@ -104,8 +101,8 @@
 		0C4B20D221956DAC0062E44B /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0C4B20D4219573020062E44B /* TestMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMediator.swift; sourceTree = "<group>"; };
 		0C5EF43921A523CB00FDD405 /* 404.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 404.jpg; sourceTree = "<group>"; };
-		0C5EF43C21A52CD800FDD405 /* CallLater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLater.swift; sourceTree = "<group>"; };
-		0C5EF43E21A52D5600FDD405 /* TickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickManager.swift; sourceTree = "<group>"; };
+		0C5EF43C21A52CD800FDD405 /* CRLCallLater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRLCallLater.swift; sourceTree = "<group>"; };
+		0C5EF43E21A52D5600FDD405 /* CRLTickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRLTickManager.swift; sourceTree = "<group>"; };
 		0C6250E021A6DF9200E9998A /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		0C6250E721AB9B0C00E9998A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0C6250E921AB9B1700E9998A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -237,7 +234,7 @@
 		0C4B20C42192F3070062E44B /* event */ = {
 			isa = PBXGroup;
 			children = (
-				0C4B20C52192F31F0062E44B /* EventDispatcher.swift */,
+				0C4B20C52192F31F0062E44B /* CRLEventDispatcher.swift */,
 				0C4B20C8219305F80062E44B /* IEventDispatcher.swift */,
 				0C4B20CB21943F870062E44B /* Event.swift */,
 			);
@@ -273,8 +270,8 @@
 		0C5EF43B21A52CBD00FDD405 /* manager */ = {
 			isa = PBXGroup;
 			children = (
-				0C5EF43C21A52CD800FDD405 /* CallLater.swift */,
-				0C5EF43E21A52D5600FDD405 /* TickManager.swift */,
+				0C5EF43C21A52CD800FDD405 /* CRLCallLater.swift */,
+				0C5EF43E21A52D5600FDD405 /* CRLTickManager.swift */,
 			);
 			path = manager;
 			sourceTree = "<group>";
@@ -329,8 +326,6 @@
 		0CE201D321901024006C6FF0 = {
 			isa = PBXGroup;
 			children = (
-				0C196852226057BA00B25C5E /* My.h */,
-				0C196853226057BA00B25C5E /* My.m */,
 				0C19684D226056B300B25C5E /* newSDK */,
 				0C19684C226056A100B25C5E /* oldSDK */,
 				0CE201DE21901024006C6FF0 /* xianzhan */,
@@ -456,8 +451,7 @@
 				0CE1527E219146E700945FA5 /* Singleton.swift in Sources */,
 				0CE201E221901024006C6FF0 /* ViewController.swift in Sources */,
 				0CE1527C219142BE00945FA5 /* View.swift in Sources */,
-				0C5EF43F21A52D5600FDD405 /* TickManager.swift in Sources */,
-				0C196854226057BA00B25C5E /* My.m in Sources */,
+				0C5EF43F21A52D5600FDD405 /* CRLTickManager.swift in Sources */,
 				0C4B20D5219573020062E44B /* TestMediator.swift in Sources */,
 				0C4B20B62192CE8F0062E44B /* AbstractIAP.swift in Sources */,
 				0C4B20C9219305F80062E44B /* IEventDispatcher.swift in Sources */,
@@ -474,11 +468,11 @@
 				0CE1527A2191412900945FA5 /* Facade.swift in Sources */,
 				0C4B20A72191757E0062E44B /* CoreDefine.swift in Sources */,
 				0C4B20B82192D1800062E44B /* ProductsRequest.swift in Sources */,
-				0C4B20C62192F31F0062E44B /* EventDispatcher.swift in Sources */,
+				0C4B20C62192F31F0062E44B /* CRLEventDispatcher.swift in Sources */,
 				0C4B20AF2191CCF30062E44B /* BaseWebViewController.swift in Sources */,
 				0C4B20A021915A100062E44B /* Mediator.swift in Sources */,
 				0C4B20A52191744C0062E44B /* RFJSSDK.swift in Sources */,
-				0C5EF43D21A52CD800FDD405 /* CallLater.swift in Sources */,
+				0C5EF43D21A52CD800FDD405 /* CRLCallLater.swift in Sources */,
 				0C4B20AB2191C3DC0062E44B /* AppUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

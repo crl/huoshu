@@ -74,7 +74,7 @@ class InjectEventTypeHandle:NSObject {
     var events:[String]! = nil;
 }
 
-class MVCHost:EventDispatcher,IMVCHost {
+class MVCHost:CRLEventDispatcher,IMVCHost {
     var facade:IFacade;
     private var readyHandles:[RFListenerItem<Event>]?=nil;
     

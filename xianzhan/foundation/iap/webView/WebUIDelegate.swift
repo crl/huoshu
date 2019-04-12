@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class WebUIDelegate: EventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
+class WebUIDelegate: CRLEventDispatcher,WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate {
     
     private var webView:WKWebView!;
     let view:UIViewController;

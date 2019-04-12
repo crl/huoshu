@@ -13,7 +13,7 @@ protocol ITickable:NSObjectProtocol {
 }
 
 
-class TickManager: NSObject {
+class CRLTickManager: NSObject {
 
     private static var list:[RFListenerItem<DispatchTime>]=[];
     private static var listType:[ITickable]=[];
@@ -21,8 +21,8 @@ class TickManager: NSObject {
     
     @objc static func update(){
         
-        let l=TickManager.list;
-        let r=TickManager.listType;
+        let l=CRLTickManager.list;
+        let r=CRLTickManager.listType;
         if(l.count==0 && r.count==0){
             return;
         }
@@ -39,7 +39,7 @@ class TickManager: NSObject {
     }
     
     static func Start(delta:TimeInterval=0.1){
-        timer=Timer(timeInterval: delta, target:TickManager.self, selector: #selector(update), userInfo: nil, repeats: true);
+        timer=Timer(timeInterval: delta, target:CRLTickManager.self, selector: #selector(update), userInfo: nil, repeats: true);
         RunLoop.current.add(timer, forMode: .default);
         timer.fire();
     }

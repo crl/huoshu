@@ -9,7 +9,7 @@
 import UIKit
 import GameKit;
 
-class GameCenter:EventDispatcher,GKGameCenterControllerDelegate {
+class GameCenter:CRLEventDispatcher,GKGameCenterControllerDelegate {
     var gameCenterEnabled:Bool=false;
     
     var playerID:String?;

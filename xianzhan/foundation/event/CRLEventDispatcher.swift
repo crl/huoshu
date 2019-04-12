@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventDispatcher: NSObject,IEventDispatcher {
+class CRLEventDispatcher: NSObject,IEventDispatcher {
     private var eventsMap:[String:[RFListenerItem<Event>]]=[:];
     
     func ons(_ events:String..., handle: Selector, _ selfObj: AnyObject?) {

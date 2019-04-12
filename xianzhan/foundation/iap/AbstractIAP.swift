@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit;
 
-class AbstractIAP: EventDispatcher,SKPaymentTransactionObserver {
+class AbstractIAP: CRLEventDispatcher,SKPaymentTransactionObserver {
     var productsRequest:ProductsRequest!;
     var paymentQueue:SKPaymentQueue!;
     
